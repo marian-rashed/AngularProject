@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { LogInComponent } from '../Components/log-in/log-in.component';
-import {NavbarComponent} from './navbar/navbar.component'
-import {SidebarComponent} from './sidebar/sidebar.component'
+import { LogInComponent } from '../assets/components/logIn/log-in.component';
+import {NavbarComponent} from '../assets/components/navbar/navbar.component'
+import {SidebarComponent} from '../assets/components/sidebar/sidebar.component'
 
 
 @Component({
