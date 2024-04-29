@@ -1,0 +1,111 @@
+.sidebar {
+    width: 250px;
+    height: 100%;
+    position: fixed;
+    top: 6rem;
+    left: 4rem;
+    background-color: #00BD97 !important;
+    color: white;
+    padding-top: 20px;
+  }
+  
+  .profile {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .profile-image {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+  }
+  
+  .profile-name {
+    color: #fff;
+  }
+  
+  .menu-items {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+
+  
+  .menu-items li i {
+    margin-right: 10px;
+  }
+  .toggle-icons {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    cursor: pointer;
+    color: white;
+  }
+  .sidebar {
+  width: 250px; /* Initial width */
+  /* Other styles */
+  padding-left: 20px;
+  
+}  
+  .sidebar.collapsed {
+    width: 150px; /* Reduced width when collapsed */
+    transition: width 0.3s ease; /* Add transition for smooth animation */
+    text-align: center;
+  }
+
+
+
+  .logout-button {
+    margin-top: auto; /* Push the button to the bottom */
+    padding-bottom: 20px; /* Add some padding */
+  }
+  
+  .btn-logout {
+    background-color: #00BD97; /* Same color as the sidebar */
+    color: white; /* Text color */
+    border: none; /* Remove border */
+    padding: 10px 20px; /* Adjust padding */
+    cursor: pointer; /* Add cursor pointer */
+    transition: background-color 0.3s ease; /* Add transition effect */
+  }
+  
+  .btn-logout:hover {
+    background-color: #008c70; /* Change color on hover */
+  }
+  
+  
+  .arrow-icon {
+    cursor: pointer; /* Add cursor pointer to indicate it's clickable */
+  }
+  
+  .toggle-icons:hover {
+    color: #ccc;
+  }
+  .menu-items li {
+    padding: 10px;
+    color: #fff;
+    cursor: pointer; /* Add cursor pointer to indicate it's clickable */
+  }
+ 
+  /* Icons and text */
+  .menu-items li:hover i,
+  .menu-items li:hover span {
+    color: #008c70; /* Change text and icon color on hover */
+  }
+  
+  /* Logout Button */
+  .btn-logout {
+    background-color: #00BD97; /* Same color as the sidebar */
+    color: white; /* Text color */
+    border: none; /* Remove border */
+    padding: 10px 20px; /* Adjust padding */
+    cursor: pointer; /* Add cursor pointer */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Add transition effect */
+  }
+  
+  .btn-logout:hover {
+    background-color: #008c70; /* Change background color on hover */
+    color: white; /* Change text color on hover */
+  }
+  
+ 

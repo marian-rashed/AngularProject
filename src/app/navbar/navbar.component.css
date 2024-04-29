@@ -1,0 +1,71 @@
+#logo {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 5rem;
+    background: white;
+    padding-left: 5rem;
+    top: 0; /* Ensure the logo stays at the top of the page */
+}
+
+/* Other styles remain the same */
+
+
+/* Other styles remain the same */
+
+
+#img1 {
+    width: 4rem;
+    height: 3rem;
+}
+
+#p1 {
+    margin-left: 1.4rem;
+    font-size: large;
+}
+
+.search-container {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 40%;
+    display: flex;
+    align-items: center;
+    margin-left: 2rem;
+}
+
+.form-control {
+    flex: 1;
+}
+
+.input-group-text i {
+    font-size: 1rem;
+    border-radius: 50%;
+    height: 38px;
+}
+
+.bg-primary {
+    background-color: #00BD97 !important;
+}
+
+#notification {
+    position: absolute;
+    transform: translateY(-50%);
+    margin-left: 20rem; /* Adjusted margin-left instead of margin-right */
+}
+
+/* Media query for smaller screens */
+@media (max-width: 980px) {
+    #notification {
+        right: 0; /* Position notification icon to the right edge */
+        margin-left: 0; /* Remove the left margin */
+    }
+    
+    #logo {
+        padding-left: 2rem;
+    }
+
+    #p1 {
+        font-size: medium;
+    }
+}
