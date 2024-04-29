@@ -1,36 +1,43 @@
-<div id="All">
-    <div id="logo">
+<div class="d-flex flex-wrap justify-content-between">
+    <div id="logo" class="text-center my-2 d-flex flex-wrap">
         <img src="assets/Images/login.png" alt="Login Icon" id="img1" />
         <p>Logoipsum</p>
     </div>
     <div>
-        <div class="div1">
+        <div class="text-center">
             <h1>Welcome Back</h1>
             <p>Login into your account</p>
-            <button class="btn btn-outline-info">Google</button>
-            <button class="btn btn-outline-info">Facebook</button>
+            <div class="justify-content-between d-flex flex-wrap mb-3 w-100 mt-2">
+                <button class="btn custom-color" (click)="redirectToGoogle()">
+                    <img src="assets/Images/google 1.png" class="mr-2" />Google</button>
+                <button class="btn custom-color" (click)="redirectToFacebook()">
+                    <img src="assets/Images/Group.png" class="mr-2" />Facebook</button>
+            </div>
+            <span class="mb-7">-------------- Or continue with --------------</span>
         </div>
         <form>
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Email:</label>
-                <input type="email" class="form-control inputHeight" id="exampleInputEmail1"
+                <input type="email" class="form-control" id="exampleInputEmail1"
                     aria-describedby="emailHelp">
             </div>
             <div class="mb-3">
                 <label for="exampleInputPassword1" class="form-label">Password:</label>
-                <input type="password" class="form-control inputHeight" id="exampleInputPassword1">
+                <input type="password" class="form-control" id="exampleInputPassword1">
             </div>
             <div class="mb-3 form-check">
                 <input type="checkbox" class="form-check-input" id="exampleCheck1">
                 <label class="form-check-label" for="exampleCheck1">Remember Me</label>
             </div>
-            <button type="submit" class="w-100 loginbutton">LOG IN</button>
+            <button type="submit" class="w-100 rounded loginbutton">LOG IN</button>
         </form>
+
     </div>
 
-    <div id="some">
-        <p>Don’t have an account?<a href="#" class="my-5">Sign Up!</a></p>
+    <div class="text-center d-flex flex-wrap">
+        <p class="mt-2">Don’t have an account?<a href="#">Sign Up!</a></p>
         <img src="assets/Images/background.png" id="img2">
     </div>
 </div>
+
 <!-- https://www.figma.com/file/zZiOGVsHEmka0180taBhYO/Social-Media-Website-(Community)?type=design&node-id=0-1&mode=design&t=qxNljuUeolElAugm-0 -->
