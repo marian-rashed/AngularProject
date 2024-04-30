@@ -5,11 +5,13 @@ import {NavbarComponent} from '../components/navbar/navbar.component'
 import {SidebarComponent} from '../components/sidebar/sidebar.component'
 import { RouterModule } from '@angular/router';
 
+import { RegisterComponent } from '../components/register/register.component';
+
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet,LogInComponent,NavbarComponent,SidebarComponent,RouterModule],
+  imports: [RouterOutlet,LogInComponent,NavbarComponent,SidebarComponent,RouterModule ,RegisterComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
