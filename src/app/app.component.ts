@@ -13,7 +13,7 @@ import { RegisterComponent } from '../components/register/register.component';
   selector: 'app-root',
   standalone: true,
 
-  imports: [RouterOutlet,LogInComponent,NavbarComponent,SidebarComponent,RouterModule ,RegisterComponent,RouterOutlet],
+  imports: [RouterOutlet,CommonModule,LogInComponent,NavbarComponent,SidebarComponent,RouterModule ,RegisterComponent,RouterOutlet],
 
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'

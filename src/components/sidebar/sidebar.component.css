@@ -116,6 +116,6 @@
   .menu-items li a:hover {
     color: #008c70; /* Change color on hover */
   }
-  .menu-items li a.active {
-    color: #008c70; /* Change color for active link */
-  }
+  .menu-items li a.router-link-active {
+  color: #008c70; /* Change color for active link */
+}

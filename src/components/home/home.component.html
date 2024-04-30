@@ -1,1 +1,14 @@
-<p style="margin-left: 25rem; margin-top: 6rem;">home works!</p>
+<!-- suggestions.component.html -->
+<div class="suggestions-container">
+    <div class="big-card">
+        <div class="card-container">
+            <div class="card" *ngFor="let user of users">
+                <img class="user-image" [src]="user.imageUrl" alt="User Image">
+                <div class="user-details">
+                    <h6>{{ user.name }}</h6>
+                    <p>{{ user.email }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
