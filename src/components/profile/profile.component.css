@@ -1,0 +1,20 @@
+.coverPhoto {
+    float: right;
+    height: 60vh;
+}
+.floatright {
+    float: right;
+}
+.container {
+    position: relative;
+}
+.profilePhoto {
+    position: absolute;
+    top: 250px;
+    left: 30%;
+    width: 20%;
+}
+.data
+{
+    margin-top: 15%;
+}
