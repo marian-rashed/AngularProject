@@ -70,7 +70,7 @@
   }
   
   .btn-logout:hover {
-    background-color: #00BD97; /* Change color on hover */
+    background-color: #008c70; /* Change color on hover */
   }
   
   
@@ -90,7 +90,7 @@
   /* Icons and text */
   .menu-items li:hover i,
   .menu-items li:hover span {
-    color: #00BD97; /* Change text and icon color on hover */
+    color: #008c70; /* Change text and icon color on hover */
   }
   
   /* Logout Button */
