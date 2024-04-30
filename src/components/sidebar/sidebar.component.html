@@ -1,21 +1,20 @@
 <div class="sidebar" [ngClass]="{'collapsed': collapsed}">
-    <div class="arrow-icon" (click)="toggleIcons()">
-      <i [ngClass]="showText ? 'fas fa-chevron-up' : 'fas fa-chevron-down'" [ngStyle]="{'font-size': iconSize}"></i>
-    </div>
-    <div class="profile">
-      <img src="../../assets/Images/hagar.jpg" alt="Profile Image" class="profile-image">
-      <h6 class="profile-name">Hagar Ibrahim</h6>
-    </div>
-    <ul class="menu-items">
-      <li><i class="fas fa-home" [ngStyle]="{'font-size': iconSize}"></i> <span *ngIf="showText">Home</span></li>
-      <li><i class="fas fa-bell" [ngStyle]="{'font-size': iconSize}"></i> <span *ngIf="showText">Notification</span></li>
-      <li><i class="fas fa-envelope" [ngStyle]="{'font-size': iconSize}"></i> <span *ngIf="showText">Message</span></li>
-      <li><i class="fas fa-folder" [ngStyle]="{'font-size': iconSize}"></i> <span *ngIf="showText">Collection</span></li>
-      <li><i class="fas fa-user" [ngStyle]="{'font-size': iconSize}"></i> <span *ngIf="showText">Profile</span></li>
-      <li><i class="fas fa-comment" [ngStyle]="{'font-size': iconSize}"></i> <span *ngIf="showText">Chat</span></li>
-    </ul>
-    <div class="logout-button">
-        <button class="btn btn-logout">Logout</button>
-      </div>
+  <div class="arrow-icon" (click)="toggleIcons()">
+    <i [ngClass]="showText ? 'fas fa-chevron-up' : 'fas fa-chevron-down'" [ngStyle]="{'font-size': iconSize}"></i>
   </div>
-  
+  <div class="profile">
+    <img src="../../assets/Images/hagar.jpg" alt="Profile Image" class="profile-image">
+    <h6 class="profile-name">Hagar Ibrahim</h6>
+  </div>
+  <ul class="menu-items">
+    <li><a routerLink="home" routerLinkActive="active"><i class="fas fa-home" [ngStyle]="{'font-size': iconSize}"></i> <span *ngIf="showText">Home</span></a></li>
+    <li><a routerLink="notification" routerLinkActive="active"><i class="fas fa-bell" [ngStyle]="{'font-size': iconSize}"></i> <span *ngIf="showText">Notification</span></a></li>
+    <li><a routerLink="message" routerLinkActive="active"><i class="fas fa-envelope" [ngStyle]="{'font-size': iconSize}"></i> <span *ngIf="showText">Message</span></a></li>
+    <li><a routerLink="collection" routerLinkActive="active"><i class="fas fa-folder" [ngStyle]="{'font-size': iconSize}"></i> <span *ngIf="showText">Collection</span></a></li>
+    <li><a routerLink="profile" routerLinkActive="active"><i class="fas fa-user" [ngStyle]="{'font-size': iconSize}"></i> <span *ngIf="showText">Profile</span></a></li>
+    <li><a routerLink="chat" routerLinkActive="active"><i class="fas fa-comment" [ngStyle]="{'font-size': iconSize}"></i> <span *ngIf="showText">Chat</span></a></li>
+  </ul>
+  <div class="logout-button">
+    <button class="btn btn-logout">Logout</button>
+  </div>
+</div>

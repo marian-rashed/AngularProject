@@ -4,12 +4,13 @@ import { LogInComponent } from '../components/logIn/log-in.component';
 import {NavbarComponent} from '../components/navbar/navbar.component'
 import {SidebarComponent} from '../components/sidebar/sidebar.component'
 import { RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet,LogInComponent,NavbarComponent,SidebarComponent,RouterModule],
+  imports: [RouterOutlet,CommonModule,LogInComponent,NavbarComponent,SidebarComponent,RouterModule,RouterOutlet],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
