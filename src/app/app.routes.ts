@@ -9,7 +9,7 @@ import { NotfoundComponent } from '../components/notfound/notfound.component';
 import { LogInComponent } from '../components/logIn/log-in.component';
 import { RegisterComponent } from '../components/register/register.component';
 import { LayoutComponent } from '../components/layout/layout.component';
-import { AuthService } from '../Services/auth.service';
+import { AuthGuard } from '../Services/auth.guard';
 
 export  const routes: Routes = [
     { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -18,7 +18,7 @@ export  const routes: Routes = [
     {
       path: '',
       component: LayoutComponent,
-      canActivate: [AuthService],
+      canActivate: [AuthGuard],
       children: [
         { path: 'home', component: HomeComponent },
         { path: 'profile', component: ProfileComponent },

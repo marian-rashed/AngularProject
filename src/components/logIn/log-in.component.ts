@@ -12,8 +12,7 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./log-in.component.css']
 })
 export class LogInComponent {
-  username: string = '';
-  password: string = '';
+  credentials = { email: '', password: '' };
 
   constructor(private authService: AuthService, private router: Router) {}
 
@@ -25,15 +24,16 @@ export class LogInComponent {
     window.location.href = 'https://www.facebook.com';
   }
 
-  signIn() {
-    // Call authService method to check authentication
-    const isAuthenticated = this.authService.checkIfUserIsAuthenticated();
-
-    if (isAuthenticated) {
-      this.router.navigate(['/home']); // Redirect to home page if authentication successful
-    } else {
-      // Handle authentication failure (e.g., show error message)
-      console.log('Authentication failed');
-    }
+  signIn(): void {
+    this.authService.login(this.credentials).subscribe(
+      
+      (response) => {
+        this.authService.setToken(response.token); // Store token in localStorage
+        this.router.navigate(['/home']); // Redirect to home page
+      },
+      (error) => {
+        console.log('Login failed:', error);
+      }
+    );
   }
 }

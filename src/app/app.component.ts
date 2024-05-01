@@ -7,13 +7,13 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
 import { RegisterComponent } from '../components/register/register.component';
-
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
   standalone: true,
 
-  imports: [RouterOutlet,CommonModule,LogInComponent,NavbarComponent,SidebarComponent,RouterModule ,RegisterComponent,RouterOutlet],
+  imports: [HttpClientModule,RouterOutlet,CommonModule,LogInComponent,NavbarComponent,SidebarComponent,RouterModule ,RegisterComponent,RouterOutlet],
 
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
