@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 
 
 
+
 @Component({
   selector: 'app-register',
   standalone: true,
@@ -14,7 +15,14 @@ export class RegisterComponent {
   title='register'
  
 
-  constructor(private router: Router) { }
+  constructor(private router: Router) {}
+
+  // Function to handle registration
+  register() {
+    // Add your registration logic here
+    // After successful registration, navigate to the login page
+    this.router.navigate(['/login']);
+  }
 
   redirectToGoogle(): void {
     window.location.href = 'https://accounts.google.com';
