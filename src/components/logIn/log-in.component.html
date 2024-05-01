@@ -1,73 +1,55 @@
 <div class="container-fluid">
-
-
-    <!-- Registration Form and Image -->
-    <div class="row mt-2">
-  
-  
-  
+  <!-- Registration Form and Image -->
+  <div class="row mt-2">
       <!-- Form Column -->
       <div class="col-md-8">
-  
-        <!-- Logo and Website Name -->
-        <div id="logo" class="text-center my-2 d-flex justify-content-between align-items-center">
-          <div class="d-flex align-items-center">
-            <img src="assets/Images/login.png" alt="Login Icon" />
-            <h2 class="mb-0 ml-2">Logoipsum</h2>
+          <!-- Logo and Website Name -->
+          <div id="logo" class="text-center my-2 d-flex justify-content-between align-items-center">
+              <div class="d-flex align-items-center">
+                  <img src="assets/Images/login.png" alt="Login Icon" />
+                  <h2 class="mb-0 ml-2">Logoipsum</h2>
+              </div>
+              <div class="text-right">
+                  <h4 class="mb-0">Haven't an account! <a routerLink="/register" class="signin">Sign UP </a></h4>
+              </div>
           </div>
-          <div class="text-right">
-            <h4 class="mb-0">Haven't an account! <a href="#" class="signin">Sign UP </a></h4>
+          <div class="card mt-5">
+              <div class="card-body mt-3">
+                  <h1 class="card-title text-center "> Welcome Back </h1>
+                  <h5 class="text-center">Sign in to your account </h5>
+                  <div class="row d-flex mt-4">
+                      <div class="col d-flex justify-content-end">
+                          <button type="button" class="btn btn-lg custom-color" (click)="redirectToGoogle()">
+                              <img src="assets/Images/google 1.png" class="mr-2" />
+                              Google
+                          </button>
+                      </div>
+                      <div class="col">
+                          <button type="button" class="btn btn-lg custom-color" (click)="redirectToFacebook()">
+                              <img src="assets/Images/Group.png" class="mr-2" />
+                              Facebook
+                          </button>
+                      </div>
+                  </div>
+                  <form>
+                      <div class="mb-3">
+                          <label for="email" class="form-label">Email address</label>
+                          <input type="email" class="form-control" id="email" name="email" required [(ngModel)]="username">
+                      </div>
+                      <div class="mb-3">
+                          <label for="password" class="form-label">Password</label>
+                          <input type="password" class="form-control" id="password" name="password" required [(ngModel)]="password">
+                      </div>
+                      <div class="row d-flex justify-content-center">
+                        <button type="submit" class="col-4 btn btn-lg justify-content-end rounded-3 SignUp" (click)="signIn()">SIGN IN!</button>
+                      </div>
+                  </form>
+              </div>
           </div>
-        </div>
-  
-  
-        <div class="card mt-5">
-          <div class="card-body mt-3">
-  
-            <h1 class="card-title text-center "> Welcome Back </h1>
-            <h5 class="text-center">sign in to your account </h5>
-  
-  
-            <div class="row d-flex mt-4">
-              <div class="col d-flex justify-content-end">
-                <button type="button" class="btn btn-lg custom-color "  (click)="redirectToGoogle()">
-                  <img src="assets/Images/google 1.png" class="mr-2" />
-                  Google</button>
-              </div>
-              <div class="col">
-                <button type="button" class="btn  btn-lg custom-color  " (click)="redirectToFacebook()">
-                  <img src="assets/Images/Group.png" class="mr-2" />
-                  Facebook </button>
-              </div>
-            </div>
-  
-  
-  
-            <form>
-              
-              <div class="mb-3">
-                <label for="email" class="form-label">Email address</label>
-                <input type="email" class="form-control" id="email" name="email" required>
-              </div>
-              <div class="mb-3">
-                <label for="password" class="form-label">Password</label>
-                <input type="password" class="form-control" id="password" name="password" required>
-              </div>
-              <div class="row d-flex justify-content-center">
-  
-                <button type="button" class=" col-4 btn btn-lg justify-content-end  rounded-3  SignUp ">SIGN IN !</button>
-              </div>
-  
-  
-            </form>
-          </div>
-        </div>
       </div>
-  
       <!-- Image Column -->
       <div class="col-md-4">
-        <img src="assets/Images/background.png" class="img-fluid" alt="Registration Image">
+          <img src="assets/Images/background.png" class="img-fluid" alt="Registration Image">
       </div>
-  
-    </div>
   </div>
+</div>
