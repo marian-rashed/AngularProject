@@ -34,11 +34,11 @@
                   <form>
                       <div class="mb-3">
                           <label for="email" class="form-label">Email address</label>
-                          <input type="email" class="form-control" id="email" name="email" required [(ngModel)]="username">
+                          <input type="email" class="form-control" id="email" name="email" required [(ngModel)]="credentials.email">
                       </div>
                       <div class="mb-3">
                           <label for="password" class="form-label">Password</label>
-                          <input type="password" class="form-control" id="password" name="password" required [(ngModel)]="password">
+                          <input type="password" class="form-control" id="password" name="password" required [(ngModel)]="credentials.password">
                       </div>
                       <div class="row d-flex justify-content-center">
                         <button type="submit" class="col-4 btn btn-lg justify-content-end rounded-3 SignUp" (click)="signIn()">SIGN IN!</button>

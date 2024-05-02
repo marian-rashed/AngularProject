@@ -1,20 +1,18 @@
 .coverPhoto {
-    float: right;
+    
     height: 60vh;
 }
-.floatright {
-    float: right;
-}
+
 .container {
     position: relative;
 }
 .profilePhoto {
     position: absolute;
-    top: 250px;
-    left: 30%;
+    top: 25%;
+    left: 5%;
     width: 20%;
 }
 .data
 {
-    margin-top: 15%;
+   
 }
