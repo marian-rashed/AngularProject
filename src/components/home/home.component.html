@@ -2,26 +2,36 @@
     <div class="col-md-8">
         <div class="container-fluid">
             <!-- Posts -->
-            <div class="posts">
-                <div class="card-container">
-                    <div class="card">
-                        <div class="user-details">
-                            <h6>post</h6>
-                            <p>sklaldiskdxa</p>
-                        </div>
+            <div class="card text-end post" style="width: 40rem; ">
+                <div class="card-body">
+                    <div class="input-group rounded-5">
+                        <textarea class="rounded-5 " id="txt1" class="form-control" aria-label="With textarea"
+                            placeholder="What's happining ?"></textarea>
                     </div>
+
+                    <div class="reactions d-flex justify-content-between mt-5 w-25 ">
+                        <i class="fa-solid fa-camera fa-2xl" style="color: #2e2e2e;"></i>
+                        <i id="clickemojie" class="fa-regular fa-face-smile fa-2xl   " style="color: #2e2e2e;"></i>
+                        <i class="fa-solid fa-calendar-days fa-2xl" style="color: #2e2e2e;"></i>
+
+                    </div>
+
+                    <a href="#" class="btn text-light fs-5 fw-bold mt-3 rounded-3" style="background-color: #00BD97;">Publish Post</a>
                 </div>
             </div>
         </div>
     </div>
 
+
+
+
     <div class="col-md-4">
         <div class="container-fluid">
             <!-- Suggestions -->
             <div class="suggestions">
-                <div class="big-card">
-                    <div class="card-container">
-                        <div class="card" *ngFor="let user of users">
+                <div class="big-card sugess">
+                    <div class="card-container sugess-cont">
+                        <div class="card  sugesscard" *ngFor="let user of users">
                             <img class="user-image" [src]="user.imageUrl" alt="User Image">
                             <div class="user-details">
                                 <h6>{{ user.name }}</h6>
