@@ -1,8 +1,23 @@
-<app-navbar></app-navbar>
-<div class="container">
+<div class="container-fluid">
+    <!-- Navbar -->
     <div class="row">
-        <app-sidebar class="col-4"></app-sidebar>
-        <router-outlet class="col-8"></router-outlet>
+        <div class="col">
+            <app-navbar></app-navbar>
+        </div>
     </div>
 
+    <!-- Main Content -->
+    <div class="row">
+        <!-- Sidebar -->
+        <div class="col-md-3">
+            <div class="container-fluid">
+                <app-sidebar></app-sidebar>
+            </div>
+        </div>
+
+        <!-- Main Content Area -->
+        <div class="col-md-9" style="margin-top: 5rem;">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
 </div>

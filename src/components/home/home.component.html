@@ -1,12 +1,34 @@
-<!-- suggestions.component.html -->
-<div class="suggestions-container">
-    <div class="big-card">
-        <div class="card-container">
-            <div class="card" *ngFor="let user of users">
-                <img class="user-image" [src]="user.imageUrl" alt="User Image">
-                <div class="user-details">
-                    <h6>{{ user.name }}</h6>
-                    <p>{{ user.email }}</p>
+<div class="row mt-4">
+    <div class="col-md-8">
+        <div class="container-fluid">
+            <!-- Posts -->
+            <div class="posts">
+                <div class="card-container">
+                    <div class="card">
+                        <div class="user-details">
+                            <h6>post</h6>
+                            <p>sklaldiskdxa</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="container-fluid">
+            <!-- Suggestions -->
+            <div class="suggestions">
+                <div class="big-card">
+                    <div class="card-container">
+                        <div class="card" *ngFor="let user of users">
+                            <img class="user-image" [src]="user.imageUrl" alt="User Image">
+                            <div class="user-details">
+                                <h6>{{ user.name }}</h6>
+                                <p>{{ user.email }}</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
