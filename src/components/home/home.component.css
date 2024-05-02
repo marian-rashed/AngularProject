@@ -1,6 +1,7 @@
 /* suggestions.component.css */
 .suggestions-container {
     float: right; /* Align to the right */
+    
 }
 
 /* suggestions.component.css */
@@ -74,3 +75,8 @@
     justify-content: center;
     align-items: flex-start; /* Align content to the left */
 }
+
+
+
+
+
