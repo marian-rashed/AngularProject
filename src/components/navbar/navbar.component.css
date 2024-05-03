@@ -6,6 +6,7 @@
     height: 5rem;
     background: white;
     padding-left: 5rem;
+    left:0rem;
     top: 0;
     z-index: 1000; /* Ensure the logo stays at the top of the page */
 }
