@@ -5,7 +5,6 @@ import {NavbarComponent} from '../components/navbar/navbar.component'
 import {SidebarComponent} from '../components/sidebar/sidebar.component'
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-
 import { RegisterComponent } from '../components/register/register.component';
 
 

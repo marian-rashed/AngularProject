@@ -1,1 +1,10 @@
 <p style="margin-left: 25rem; margin-top: 6rem;">notification works!</p>
+@for (item of items; track $index) {
+    <div class="card" style="width: 18rem;" >
+        <div class="card-body">
+          <h5 class="card-title">{{item.content}}</h5>
+          <p class="card-text">{{item.postTime}}</p>
+          <p class="card-text">{{item.userId}}</p>
+        </div>
+      </div>
+}
