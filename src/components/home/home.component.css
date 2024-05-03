@@ -1,10 +1,11 @@
 /* suggestions.component.css */
 .suggestions-container {
     float: right; /* Align to the right */
+    
 }
 
 /* suggestions.component.css */
-.big-card {
+.sugess {
     width: 370px; /* Adjust width as needed */
     background-color: white;
     border-radius: 10px;
@@ -14,12 +15,12 @@
 }
 
 
-.card-container {
+.sugess-cont {
     display: flex;
     flex-direction: column;
 }
 
-.card {
+.sugesscard {
     border: 1px solid  #00BD97;;
     border-radius: 10px;
     padding: 10px;
@@ -31,7 +32,7 @@
     height: 150px;
 }
 
-.card:hover {
+.sugesscard:hover {
     box-shadow: 0 8px 16px #00BD97;
 }
 
@@ -44,7 +45,7 @@
 /* suggestions.component.css */
 
 /* Add background image to small cards */
-.card::before {
+.sugesscard::before {
     content: '';
     position: absolute;
     top: 0;
@@ -74,3 +75,8 @@
     justify-content: center;
     align-items: flex-start; /* Align content to the left */
 }
+
+
+
+
+

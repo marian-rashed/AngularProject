@@ -1,0 +1,25 @@
+<div class="container">
+    <!-- Navbar -->
+    <div class="row">
+        <div class="col">
+            <app-navbar></app-navbar>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="row">
+        <!-- Sidebar --> 
+
+        <!-- i change the col divition  -->
+        <div class="col-2">
+            <div class="container-fluid">
+                <app-sidebar></app-sidebar>
+            </div>
+        </div>
+
+        <!-- Main Content Area -->
+        <div class="col-md-9" style="margin-top: 5rem;">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>
