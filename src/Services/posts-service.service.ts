@@ -14,4 +14,8 @@ export class PostsServiceService {
   {
     return this._HttpClient.get<Post[]>("http://localhost:5017/api/posts");
   }
+  addPost(newPost: Post): Observable<Post> {
+    return this._HttpClient.post<Post>("http://localhost:5017/api/Posts", newPost);
+  }
 }
+

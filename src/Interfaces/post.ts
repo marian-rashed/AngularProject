@@ -3,4 +3,5 @@ export interface Post {
     postTime: string, 
     postImage: string,
      userId: string
+     
 }
