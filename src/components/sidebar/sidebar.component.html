@@ -10,12 +10,11 @@
   <ul class="menu-items">
     <li><a routerLink="home" routerLinkActive="active"><i class="fas fa-home" [ngStyle]="{'font-size': iconSize}"></i> <span *ngIf="showText">Home</span></a></li>
     <li><a routerLink="notifications" routerLinkActive="active"><i class="fas fa-bell" [ngStyle]="{'font-size': iconSize}"></i> <span *ngIf="showText">Notification</span></a></li>
-    <li><a routerLink="message" routerLinkActive="active"><i class="fas fa-envelope" [ngStyle]="{'font-size': iconSize}"></i> <span *ngIf="showText">Message</span></a></li>
     <li><a routerLink="collection" routerLinkActive="active"><i class="fas fa-folder" [ngStyle]="{'font-size': iconSize}"></i> <span *ngIf="showText">Collection</span></a></li>
     <li><a routerLink="profile" routerLinkActive="active"><i class="fas fa-user" [ngStyle]="{'font-size': iconSize}"></i> <span *ngIf="showText">Profile</span></a></li>
     <li><a routerLink="chat" routerLinkActive="active"><i class="fas fa-comment" [ngStyle]="{'font-size': iconSize}"></i> <span *ngIf="showText">Chat</span></a></li>
   </ul>
   <div class="logout-button">
-    <button class="btn btn-logout">Logout</button>
+    <button class="btn btn-logout" (click)="logout()">Logout</button>
   </div>
 </div>

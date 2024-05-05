@@ -5,47 +5,56 @@
             <div class="card text-end post" style="width: 40rem; ">
                 <div class="card-body">
                     <div class="input-group rounded-5">
-                        <textarea class="rounded-5 " id="txt1" class="form-control" aria-label="With textarea"
-                            placeholder="What's happining ?"></textarea>
-                    </div>
+                        <textarea class="rounded-5" id="txt1" class="form-control" aria-label="With textarea"
+          placeholder="What's happening?" 
+          (input)="updateContent($event)">{{ newPost.content }}</textarea>
 
-                    <div class="reactions d-flex justify-content-between mt-5 w-25 ">
-                        <i class="fa-solid fa-camera fa-2xl" style="color: #2e2e2e;"></i>
-                        <i id="clickemojie" class="fa-regular fa-face-smile fa-2xl   " style="color: #2e2e2e;"></i>
-                        <i class="fa-solid fa-calendar-days fa-2xl" style="color: #2e2e2e;"></i>
 
                     </div>
 
-                    <a href="#" class="btn text-light fs-5 fw-bold mt-3 rounded-3"
+                    <!-- HTML -->
+<div class="reactions d-flex justify-content-between mt-5 w-25 ">
+    <label for="fileInput">
+        <i class="fa-solid fa-camera fa-2xl" style="color: #2e2e2e; cursor: pointer;"></i>
+    </label>
+    <input id="fileInput" type="file" (change)="handleFileInput($event)" accept="image/*" style="display: none;">
+    <i id="clickemojie" class="fa-regular fa-face-smile fa-2xl" style="color: #2e2e2e;"></i>
+    <i class="fa-solid fa-calendar-days fa-2xl" style="color: #2e2e2e;"></i>
+</div>
+
+
+                    <a (click)="publish()" class="btn text-light fs-5 fw-bold mt-3 rounded-3"
                         style="background-color: #00BD97;">Publish Post</a>
                 </div>
             </div>
 
 
-
-
             <!-- postes section  -->
-            <div class=" my-5 rounded-5" style="width: 40rem; ">
+            <div class=" my-5 rounded-5" style="width: 40rem;" *ngFor="let item of items">
                 <div class=" d-flex justify-content-center">
                     <div class="">
                         <div class="card">
                             <div class="card-body">
                                 <div class="d-flex flex-start align-items-center">
+                                    <!-- user image -->
                                     <img class="rounded-circle shadow-1-strong me-3" src="../../assets/Images/hagar.jpg"
                                         alt="avatar" width="80" height="80" />
                                     <div>
+                                        <!-- user name -->
                                         <h6 class="fw-bold text-dark mb-1">Hager Ibrahim</h6>
                                         <p class="text-muted small mb-0">
-                                            5/3/2024
+                                            {{item.postTime}}
                                         </p>
                                     </div>
                                 </div>
 
                                 <p class="mt-3 mb-4 pb-2">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                                    quis nostrud exercitation ullamco laboris nisi ut aliquip consequat.
+                                    {{item.content}}
                                 </p>
+                                <img *ngIf="isPostImageString(item)" [src]="item.postImage">
+                                
+
+
 
                                 <!-- reaction section -->
                                 <!-- like  -->

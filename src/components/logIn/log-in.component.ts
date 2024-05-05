@@ -29,7 +29,7 @@ export class LogInComponent {
       
       (response) => {
         this.authService.setToken(response.token); // Store token in localStorage
-        this.router.navigate(['/home']); // Redirect to home page
+        this.router.navigate(['/home'], { queryParams: { email: this.credentials.email }}); // Redirect to home page
       },
       (error) => {
         console.log('Login failed:', error);
