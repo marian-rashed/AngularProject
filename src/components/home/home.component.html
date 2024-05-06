@@ -90,13 +90,13 @@
                                 <!-- like  -->
                                 <div class=" d-flex justify-content-between  w-25  mt-2">
 
-                                    <a class="d-flex align-items-center me-3 text-decoration-none" (click)="addReact(item.id, true)">
+                                    <a class="d-flex align-items-center me-3 text-decoration-none" (click)="updateReactValue(item.id, true)">
                                         <i class="fa-regular fa-thumbs-up fa-xl" style="color: #2e2e2e;"></i>
                                     </a>
-                                    <!-- Dislike -->
-                                    <a  class="d-flex align-items-center me-3 text-decoration-none" (click)="addReact(item.id, false)">
+                                    <a class="d-flex align-items-center me-3 text-decoration-none" (click)="updateReactValue(item.id, false)">
                                         <i class="fa-regular fa-thumbs-down fa-xl" style="color: #2e2e2e;"></i>
                                     </a>
+                                    
                                     <!-- show reacts list -->
                                     <button class="btn btn-light" (click)="showReactList(item)">
                                         <i class="fas fa-list fa-xl" style="color: #2e2e2e;"></i>
