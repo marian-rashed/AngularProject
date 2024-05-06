@@ -5,6 +5,8 @@ import { Post } from '../../Interfaces/post';
 import { AuthService } from '../../Services/auth.service';
 import { ActivatedRoute } from '@angular/router';
 import { formatDate } from '@angular/common';
+import { React } from '../../Interfaces/react';
+import { ReactService } from '../../Services/react.service';
 
 
 @Component({
@@ -25,15 +27,18 @@ export class HomeComponent implements OnInit {
   ];
   items: Post[] = [];
   newPost: Post = { userId: '', content: '', postImage: 'string', postTime: '2024-04-29 16:43:04.3630000', id: 0 };
-  loggedInUserId: string | null = null;
+  reacts:React[]=[];
+  newReact:React={id:0,value:true,userId:'',postId:0};
+  loggedInUserId: string = '';
   email: string | null = null;
   selectedFile: File = new File([], '');
   selectedPost: Post | null = null; // To store the selected post for editing
   updatedPost: Post = { id: 0, userId: '', content: '', postImage: '', postTime: '' }; // To store the updated post data
-
+  showReactListFlag: boolean = false;
 
   constructor(
     private _PostsServiceService: PostsServiceService,
+    private _ReactService:ReactService,
     private authService: AuthService,
     private route: ActivatedRoute
   ) { }
@@ -45,8 +50,9 @@ export class HomeComponent implements OnInit {
     this.loadPosts();
     this.initializeNewPost();
     this.fetchLoggedInUserId();
+    
   }
-
+ 
 
   loadPosts(): void {
     this._PostsServiceService.GetAllPosts().subscribe({
@@ -181,6 +187,40 @@ saveEdit(): void {
       }
     });
   }
+
+  showReactList(item: Post): void {
+    this._ReactService.getReactsForPost(item.id).subscribe({
+        next: (reacts) => {
+            // Store the reacts for the current post
+            this.reacts = reacts;
+        },
+        error: (err) => {
+            console.log(err);
+        }
+    });
+}
+
+
+addReact(postId: number, value: boolean): void {
+  
+  this.newReact.userId = this.loggedInUserId;
+  this.newReact.postId = postId;
+  this.newReact.value = value;
+  this.saveReact();
+}
+
+saveReact(): void {
+  this._ReactService.addReact(this.newReact).subscribe({
+      next: () => {
+          
+      },
+      error: (err) => {
+          console.log(err);
+      }
+  });
+}
+
+
 
 
 }

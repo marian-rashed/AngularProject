@@ -90,12 +90,29 @@
                                 <!-- like  -->
                                 <div class=" d-flex justify-content-between  w-25  mt-2">
 
-                                    <a href="#!" class="d-flex align-items-center me-3 text-decoration-none">
+                                    <a class="d-flex align-items-center me-3 text-decoration-none" (click)="addReact(item.id, true)">
                                         <i class="fa-regular fa-thumbs-up fa-xl" style="color: #2e2e2e;"></i>
-
                                     </a>
+                                    <!-- Dislike -->
+                                    <a  class="d-flex align-items-center me-3 text-decoration-none" (click)="addReact(item.id, false)">
+                                        <i class="fa-regular fa-thumbs-down fa-xl" style="color: #2e2e2e;"></i>
+                                    </a>
+                                    <!-- show reacts list -->
+                                    <button class="btn btn-light" (click)="showReactList(item)">
+                                        <i class="fas fa-list fa-xl" style="color: #2e2e2e;"></i>
+                                    </button>
+                                    <div *ngIf="reacts.length > 0" class="reacts-list">
+                                        <h5>Reacts:</h5>
+                                        <ul>
+                                            <li *ngFor="let react of reacts">
+                                                <i *ngIf="react.value" class="fa-regular fa-thumbs-up" style="color: #2e2e2e;"></i>
+                                                <i *ngIf="!react.value" class="fa-regular fa-thumbs-down" style="color: #2e2e2e;"></i>
+                                                <!-- Display additional react information here if needed -->
+                                            </li>
+                                        </ul>
+                                    </div>
                                     <!-- comment -->
-                                    <a href="#!" class="d-flex align-items-center me-3  text-decoration-none">
+                                    <a href="#" class="d-flex align-items-center me-3  text-decoration-none">
                                         <i class="far fa-comment-dots me-2 fa-xl" style="color: #2e2e2e;"></i>
 
                                     </a>
