@@ -1,0 +1,52 @@
+<div class="row mt-4 d-flex">
+
+    <!-- Notfication  -->
+
+    <div class="col-md-9">
+
+        <h1 style="margin-left: 10px;" class="fs-2 text-secondary"> Recently</h1>
+        <div class="container-fluid mt-4 ">
+
+            <div class="card text-start rounded-5 bg-muted" style="max-width: 40rem; width: 40rem;">
+                <div class="card-body ">
+                    <!-- Notification content -->
+                    <div class="d-flex align-items-center">
+                        <img src="../../assets/Images/hagar.jpg" class="rounded-pill me-3" alt="User Image"
+                            style="width: 70px; height: 70px;">
+                        <div class="d-flex justify-content-between w-100 align-items-center">
+                            <h5 class="card-title mb-1 text-dark text-secondary">Khloud Farouk</h5>
+                            <p class="card-text mb-0 fs-5 text-secondary">5/6/2024</p>
+                        </div>
+                    </div>
+                    <p class="card-text mt-2 text-secondary fs-5">Hager commented on your post , Lorem ipsum dolor sit
+                        amet consectetur adipisicing elit. Distinctio culpa soluta pariatur minima fugiat quia et
+                        facilis. Expedita ab possimus quidem. Quae.</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+
+
+    <div class="col-md-3 ">
+        <div class="container-fluid">
+            <!-- Suggestions -->
+            <div class="suggestions">
+                <div class="big-card sugess">
+                    <div class="card-container sugess-cont">
+                        <div class="card  sugesscard" *ngFor="let user of users">
+                            <img class="user-image" [src]="user.imageUrl" alt="User Image">
+                            <div class="user-details">
+                                <h6>{{ user.name }}</h6>
+                                <p>{{ user.email }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
