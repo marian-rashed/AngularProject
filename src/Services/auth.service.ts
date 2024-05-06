@@ -29,7 +29,10 @@ export class AuthService {
   }
 
   getToken(): string | null {
-    return localStorage.getItem('token');
+    if (typeof localStorage !== 'undefined') {
+      return localStorage.getItem('token');
+    }
+    return null;
   }
 
   setToken(token: string): void {
@@ -41,5 +44,8 @@ export class AuthService {
     const token = this.getToken();
     // Add your logic to check if token is valid (e.g., not expired)
     return !!token;
+  }
+  getCurrentUser(email: string): Observable<any> {
+    return this.http.get<any>(`http://localhost:5017/api/Account/userId?email=${email}`);
   }
 }

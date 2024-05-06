@@ -5,17 +5,16 @@
   </div>
   <div class="profile">
     <img src="../../assets/Images/hagar.jpg" alt="Profile Image" class="profile-image">
-    <h6 class="profile-name">Hagar Ibrahim</h6>
+    <h5 class="profile-name mt-3 ">Hagar Ibrahim</h5>
   </div>
-  <ul class="menu-items">
+  <ul class="menu-items fs-5">
     <li><a routerLink="home" routerLinkActive="active"><i class="fas fa-home" [ngStyle]="{'font-size': iconSize}"></i> <span *ngIf="showText">Home</span></a></li>
     <li><a routerLink="notifications" routerLinkActive="active"><i class="fas fa-bell" [ngStyle]="{'font-size': iconSize}"></i> <span *ngIf="showText">Notification</span></a></li>
-    <li><a routerLink="message" routerLinkActive="active"><i class="fas fa-envelope" [ngStyle]="{'font-size': iconSize}"></i> <span *ngIf="showText">Message</span></a></li>
     <li><a routerLink="collection" routerLinkActive="active"><i class="fas fa-folder" [ngStyle]="{'font-size': iconSize}"></i> <span *ngIf="showText">Collection</span></a></li>
     <li><a routerLink="profile" routerLinkActive="active"><i class="fas fa-user" [ngStyle]="{'font-size': iconSize}"></i> <span *ngIf="showText">Profile</span></a></li>
     <li><a routerLink="chat" routerLinkActive="active"><i class="fas fa-comment" [ngStyle]="{'font-size': iconSize}"></i> <span *ngIf="showText">Chat</span></a></li>
   </ul>
-  <div class="logout-button">
-    <button class="btn btn-logout">Logout</button>
+  <div class="logout-button ">
+    <button class="btn btn-logout fs-5" (click)="logout()">Logout</button>
   </div>
 </div>
