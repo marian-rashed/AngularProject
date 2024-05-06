@@ -6,21 +6,22 @@
                 <div class="card-body">
                     <div class="input-group rounded-5">
                         <textarea class="rounded-5" id="txt1" class="form-control" aria-label="With textarea"
-          placeholder="What's happening?" 
-          (input)="updateContent($event)">{{ newPost.content }}</textarea>
+                            placeholder="What's happening?"
+                            (input)="updateContent($event)">{{ newPost.content }}</textarea>
 
 
                     </div>
 
                     <!-- HTML -->
-<div class="reactions d-flex justify-content-between mt-5 w-25 ">
-    <label for="fileInput">
-        <i class="fa-solid fa-camera fa-2xl" style="color: #2e2e2e; cursor: pointer;"></i>
-    </label>
-    <input id="fileInput" type="file" (change)="handleFileInput($event)" accept="image/*" style="display: none;">
-    <i id="clickemojie" class="fa-regular fa-face-smile fa-2xl" style="color: #2e2e2e;"></i>
-    <i class="fa-solid fa-calendar-days fa-2xl" style="color: #2e2e2e;"></i>
-</div>
+                    <div class="reactions d-flex justify-content-between mt-5 w-25 ">
+                        <label for="fileInput">
+                            <i class="fa-solid fa-camera fa-2xl" style="color: #2e2e2e; cursor: pointer;"></i>
+                        </label>
+                        <input id="fileInput" type="file" (change)="handleFileInput($event)" accept="image/*"
+                            style="display: none;">
+                        <!-- <i id="clickemojie" class="fa-regular fa-face-smile fa-2xl mt-2" style="color: #2e2e2e;"></i> -->
+                        <!-- <i class="fa-solid fa-calendar-days fa-2xl " style="color: #2e2e2e;"></i> -->
+                    </div>
 
 
                     <a (click)="publish()" class="btn text-light fs-5 fw-bold mt-3 rounded-3"
@@ -52,7 +53,7 @@
                                     {{item.content}}
                                 </p>
                                 <img *ngIf="isPostImageString(item)" [src]="item.postImage">
-                                
+
 
 
 
@@ -101,39 +102,40 @@
 
                                 <div class=" mt-5" style=" max-height: 200px; overflow-y: auto;">
                                     <div class="card rounded-5">
-                                      <div class="card-body">
-                                        <div class="row">
-                                          <div class="col-md-3">
-                                            <img src="https://image.ibb.co/jw55Ex/def_face.jpg" class="img img-rounded img-fluid" width="90" height="90" />
-                                            <p class="text-secondary mt-1">15 Minutes Ago</p>
-                                          </div>
-                                          <div class="col-md-9">
-                                            <p>
-                                              <a class="float-left text-decoration-none text-dark">
-                                                <h5>Khloud Farouk</h5>
-                                              </a>
-                                            </p>
-                                            <div class="clearfix"></div>
-                                            <!-- display comment -->
-                                            <p class="fs-5">This is a great post keep going !</p>
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <img src="https://image.ibb.co/jw55Ex/def_face.jpg"
+                                                        class="img img-rounded img-fluid" width="90" height="90" />
+                                                    <p class="text-secondary mt-1">15 Minutes Ago</p>
+                                                </div>
+                                                <div class="col-md-9">
+                                                    <p>
+                                                        <a class="float-left text-decoration-none text-dark">
+                                                            <h5>Khloud Farouk</h5>
+                                                        </a>
+                                                    </p>
+                                                    <div class="clearfix"></div>
+                                                    <!-- display comment -->
+                                                    <p class="fs-5">This is a great post keep going !</p>
 
-                                            <div class="d-flex justify-content-between w-100">
-                                            <p>
-                                        
-                                              <a class=" btn btn-outline-success">
-                                                <i class="fa fa-reply"></i> Reply
-                                              </a>
-                                              <a class=" btn text-white btn-danger">
-                                                <i class="fa fa-heart"></i> Like
-                                              </a>
-                                            </p>
+                                                    <div class="d-flex justify-content-between w-100">
+                                                        <p>
+
+                                                            <a class=" btn btn-outline-success">
+                                                                <i class="fa fa-reply"></i> Reply
+                                                            </a>
+                                                            <a class=" btn text-white btn-danger">
+                                                                <i class="fa fa-heart"></i> Like
+                                                            </a>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                          </div>
-                                        </div>
-                                      </div>
                                     </div>
-                                  </div>
-                                  
+                                </div>
+
 
 
                                 <!-- End Post comments  -->

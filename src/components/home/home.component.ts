@@ -23,6 +23,7 @@ export class HomeComponent implements OnInit {
     { imageUrl: '../../assets/Images/hagar.jpg', name: 'John Doe', email: 'john@example.com' },
     { imageUrl: '../../assets/Images/hagar.jpg', name: 'Jane Smith', email: 'jane@example.com' },
   ];
+  
   items:Post[]=[];
   newPost: Post = { userId: '', content: '', postImage: 'string', postTime: '2024-04-29 16:43:04.3630000' };
   loggedInUserId: string | null = null; 
