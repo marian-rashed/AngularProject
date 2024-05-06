@@ -25,18 +25,11 @@ export class HomeComponent implements OnInit {
     { imageUrl: '../../assets/Images/hagar.jpg', name: 'John Doe', email: 'john@example.com' },
     { imageUrl: '../../assets/Images/hagar.jpg', name: 'Jane Smith', email: 'jane@example.com' },
   ];
-<<<<<<< HEAD
-  
-  items:Post[]=[];
-  newPost: Post = { userId: '', content: '', postImage: 'string', postTime: '2024-04-29 16:43:04.3630000' };
-  loggedInUserId: string | null = null; 
-=======
   items: Post[] = [];
   newPost: Post = { userId: '', content: '', postImage: 'string', postTime: '2024-04-29 16:43:04.3630000', id: 0 };
   reacts:React[]=[];
   newReact:React={id:0,value:true,userId:'',postId:0};
   loggedInUserId: string = '';
->>>>>>> 2e9a6e62e1a32d2592af5fdf98802edaafc8dcc3
   email: string | null = null;
   selectedFile: File = new File([], '');
   selectedPost: Post | null = null; // To store the selected post for editing
