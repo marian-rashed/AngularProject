@@ -220,6 +220,34 @@ saveReact(): void {
   });
 }
 
+updateReactValue(postId: number, newValue: boolean): void {
+  const existingReact = this.reacts.find(react => react.postId === postId && react.userId === this.loggedInUserId);
+  
+  if (existingReact) {
+    if(existingReact.value !== newValue)
+      {
+    existingReact.value = newValue; 
+    this._ReactService.EditReact(existingReact.id, existingReact).subscribe({
+      next: () => {
+        const index = this.reacts.findIndex(react => react.id === existingReact.id);
+        if (index !== -1) {
+          this.reacts[index] = existingReact;
+        }
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    });
+  }else
+  {
+    this.addReact(postId,newValue);
+  }
+  }else
+  {
+    this.addReact(postId,newValue);
+  }
+}
+
 
 
 
