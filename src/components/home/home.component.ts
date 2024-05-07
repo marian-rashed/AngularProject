@@ -7,6 +7,7 @@ import { ActivatedRoute } from '@angular/router';
 import { formatDate } from '@angular/common';
 import { React } from '../../Interfaces/react';
 import { ReactService } from '../../Services/react.service';
+import { forkJoin } from 'rxjs';
 
 
 @Component({
@@ -35,6 +36,8 @@ export class HomeComponent implements OnInit {
   selectedPost: Post | null = null; // To store the selected post for editing
   updatedPost: Post = { id: 0, userId: '', content: '', postImage: '', postTime: '' }; // To store the updated post data
   showReactListFlag: boolean = false;
+  reactOnPost: { [postId: number]: { likeCount: number, dislikeCount: number } } = {};
+
 
   constructor(
     private _PostsServiceService: PostsServiceService,
@@ -50,16 +53,39 @@ export class HomeComponent implements OnInit {
     this.loadPosts();
     this.initializeNewPost();
     this.fetchLoggedInUserId();
+  
     
   }
+  
  
-
+  reactsNumber(postid:number)
+  {
+    this._PostsServiceService.getReactsNum(postid).subscribe
+    ({
+      next:(res)=>{this.reactOnPost[postid] = res
+        console.log(this.reactOnPost);
+      },
+      error: (err) => { console.log(err) }
+    });
+    
+  }
   loadPosts(): void {
     this._PostsServiceService.GetAllPosts().subscribe({
-      next: (res) => { this.items = res },
+      next: (res) => { this.items = res;
+        this.items.forEach(post => this.fetchReactCounts(post.id));
+       },
       error: (err) => { console.log(err) }
     });
   }
+  fetchReactCounts(postId: number): void {
+    this._PostsServiceService.getReactsNum(postId).subscribe({
+      next: (res) => { 
+        this.reactOnPost[postId] = res;
+      },
+      error: (err) => { console.log(err) }
+    });
+  }
+  
 
   initializeNewPost(): void {
     const currentDate = new Date();
@@ -202,21 +228,17 @@ saveEdit(): void {
 
 
 addReact(postId: number, value: boolean): void {
-  
   this.newReact.userId = this.loggedInUserId;
   this.newReact.postId = postId;
   this.newReact.value = value;
-  this.saveReact();
-}
-
-saveReact(): void {
   this._ReactService.addReact(this.newReact).subscribe({
-      next: () => {
-          
-      },
-      error: (err) => {
-          console.log(err);
-      }
+    next: () => {
+      // After adding the reaction, update the counts
+      this.fetchReactCounts(postId);
+    },
+    error: (err) => {
+      console.log(err);
+    }
   });
 }
 
@@ -232,6 +254,7 @@ updateReactValue(postId: number, newValue: boolean): void {
         const index = this.reacts.findIndex(react => react.id === existingReact.id);
         if (index !== -1) {
           this.reacts[index] = existingReact;
+          this.fetchReactCounts(postId);
         }
       },
       error: (err) => {
@@ -249,6 +272,15 @@ updateReactValue(postId: number, newValue: boolean): void {
 }
 
 
+isCurrentUserLiked(postId: number): boolean {
+  const userReaction = this.reacts.find(react => react.postId === postId && react.userId === this.loggedInUserId);
+  return userReaction ? userReaction.value === true : false;
+}
+
+isCurrentUserDisliked(postId: number): boolean {
+  const userReaction = this.reacts.find(react => react.postId === postId && react.userId === this.loggedInUserId);
+  return userReaction ? userReaction.value === false : false;
+}
 
 
 }
