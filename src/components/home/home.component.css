@@ -76,7 +76,11 @@
     align-items: flex-start; /* Align content to the left */
 }
 
+.liked {
+    color: #00BD97; /* Change to your preferred color for liked icon */
+}
 
-
-
+.disliked {
+    color: #FF0000; /* Change to your preferred color for disliked icon */
+}
 

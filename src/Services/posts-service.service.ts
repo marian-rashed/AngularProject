@@ -23,4 +23,7 @@ export class PostsServiceService {
   EditPost(postid: number, updatedPost: Post): Observable<Post> {
     return this._HttpClient.put<Post>("http://localhost:5017/api/Posts/" + postid, updatedPost);
   }
+  getReactsNum(postid:number):Observable<any>{
+    return this._HttpClient.get<any>(`http://localhost:5017/api/Posts/reactions/`+postid);
+  }
 }
