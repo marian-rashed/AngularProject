@@ -19,8 +19,7 @@ export class ProfileComponent implements OnInit {
   }
 
   fetchLoggedInUserId(): void {
-    this.route.queryParams.subscribe(params => {
-      this.email = params['email'];
+    this.email = this.authService.getQueryParam('email');
       console.log(this.email)
       if (this.email) {
         this.authService.getCurrentUser(this.email).subscribe({
@@ -28,6 +27,6 @@ export class ProfileComponent implements OnInit {
           error: (err) => { console.log(err); }
         });
       }
-    });
+    
   }
 }

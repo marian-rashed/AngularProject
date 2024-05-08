@@ -94,15 +94,15 @@ export class HomeComponent implements OnInit {
   }
 
   fetchLoggedInUserId(): void {
-    this.route.queryParams.subscribe(params => {
-      this.email = params['email'];
+    this.email = this.authService.getQueryParam('email');
+      console.log(this.email);
       if (this.email) {
         this.authService.getCurrentUser(this.email).subscribe({
           next: (user) => { this.loggedInUserId = user.userId; },
           error: (err) => { console.log(err); }
         });
       }
-    });
+    
   }
 
   isPostImageString(item: any): boolean {
