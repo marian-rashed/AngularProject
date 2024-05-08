@@ -29,7 +29,8 @@ export class LogInComponent {
       
       (response) => {
         this.authService.setToken(response.token); // Store token in localStorage
-        this.router.navigate(['/home'], { queryParams: { email: this.credentials.email }}); // Redirect to home page
+        this.router.navigate(['/home'], { queryParams: { email: this.credentials.email }});
+        this.router.navigate(['/profile'], { queryParams: { email: this.credentials.email }});
       },
       (error) => {
         console.log('Login failed:', error);
