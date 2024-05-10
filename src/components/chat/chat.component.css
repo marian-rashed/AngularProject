@@ -1,0 +1,18 @@
+
+.gradient-custom {
+    background:#00BD97;
+    
+    background: -webkit-linear-gradient(to bottom right, #00BD97,#94f3e0);
+    
+    background: linear-gradient(to bottom right, #00BD97,#94f3e0)
+    }
+    
+    .mask-custom {
+    background: rgba(24, 24, 16, 0.459);
+    border-radius: 2em;
+    backdrop-filter: blur(15px);
+    border: 2px solid rgba(255, 255, 255, 0.05);
+    background-clip: padding-box;
+    box-shadow: 10px 10px 10px rgba(46, 54, 68, 0.03);
+    color: white;
+    }
