@@ -17,4 +17,7 @@ export class CommentService {
   EditComment(commentId: number, updatedComment: Comment): Observable<Comment> {
     return this._HttpClient.put<Comment>(`http://localhost:5017/api/comment?id=${commentId}`, updatedComment);
   }
+  DeleteComment(commentId: number): Observable<Comment> {
+    return this._HttpClient.delete<Comment>(`http://localhost:5017/api/comment/${commentId}`);
+  }
 }

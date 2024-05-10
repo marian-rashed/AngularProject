@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PostsServiceService } from '../../Services/posts-service.service';
 import { Post } from '../../Interfaces/post';
@@ -10,16 +11,16 @@ import { ReactService } from '../../Services/react.service';
 import { forkJoin } from 'rxjs';
 import { CommentService } from '../../Services/comment.service';
 import { Comment } from '../../Interfaces/comment';
-
-
+import { FormsModule } from "@angular/forms";
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,FormsModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
 })
 export class HomeComponent implements OnInit {
+
   users = [
     {
       imageUrl: '../../assets/Images/hagar.jpg',
@@ -62,7 +63,7 @@ export class HomeComponent implements OnInit {
   };
   reacts: React[] = [];
   newReact: React = { id: 0, value: true, userId: '', postId: 0 };
-  newComment: Comment = { id: 0, content: '', userId: '', postId: 0 , commentTime:''};
+  newComment: Comment = { id: 0, content: '', userId: '', postId: 0 };
   CommentContent:string = '';
   loggedInUserId: string = '';
   email: string | null = null;
@@ -79,7 +80,7 @@ export class HomeComponent implements OnInit {
   reactOnPost: {
     [postId: number]: { likeCount: number; dislikeCount: number };
   } = {};
-
+  CommentsForPost:Comment[] = [];
   constructor(
     private _PostsServiceService: PostsServiceService,
     private _ReactService: ReactService,
@@ -333,16 +334,45 @@ export class HomeComponent implements OnInit {
 
   onCreateNewComment(postid:number) {
     this.newComment.content = this.CommentContent;
-    this.newComment.commentTime = Date.now.toString();
+    //this.newComment.commentTime = Date.now().toLocaleString();
     this.newComment.postId = postid;
     this.newComment.userId = this.loggedInUserId
     this._CommentService.addComment(this.newComment).subscribe({
       next:() => {
-
+        console.log(this.newComment)
       },
       error:(err) => {
-
+        console.log(err);
+        console.log(this.newComment)
       }
     });
+  }
+
+  deleteComment(CommentId: number) {
+    this._CommentService.DeleteComment(CommentId).subscribe({
+      next:()=>{
+
+      },
+      error:(err)=>{
+        console.log(err)
+      }
+    })
+  }
+  //missing the front (html)
+  editComment(Comment: Comment) {
+    Comment.content = this.CommentContent;
+    this._CommentService.EditComment(Comment.id, Comment);
+  }
+// get comment by post id missing the front (html) implemntation
+// i thing the right way is when i click on comment icon it is open a model contain commnt
+  getCommentsbyPost(postid:number) {
+    this._CommentService.getCommentForPost(postid).subscribe({
+      next:(res) => {
+        this.CommentsForPost = res;
+      },
+      error:(err) => {
+        console.log(err);
+      }
+    })
   }
 }
