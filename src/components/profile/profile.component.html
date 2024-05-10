@@ -4,10 +4,10 @@
             <!-- Profile Cover Image -->
             <div class="position-relative bg-dark " style="height: 300px;">
                 <!-- Cover Image -->
-                <img src="https://img.freepik.com/free-photo/high-angle-shot-buildings-cloudy-sky-captured-kenya-nairobi-samburu_181624-8111.jpg?t=st=1715004108~exp=1715007708~hmac=cac79e74085899a8bc16a4a44d47f2be03112d18bb9fa8d51394498eb93f769f&w=740"
+                <img [src]="UserDataObj.coverImage"
                     alt="Cover Image" class="w-100 h-100 object-fit-cover">
                 <!-- Personal Image -->
-                <img src="../../assets/Images/hagar.jpg" alt="Personal Image" class="position-absolute"
+                <img [src]="UserDataObj.profileImage" alt="Personal Image" class="position-absolute"
                     style="bottom: 20px; left: 20px; border: 5px solid white; border-radius: 50%; width: 150px; height: 150px;">
             </div>
         </div>
@@ -17,14 +17,11 @@
     <div class="col-lg-12 bg-light">
 
         <div class="p-4 ">
-            <h2>Khloud Farouk</h2>
+            <h2>{{UserDataObj.name}}</h2>
             <div class="text-secondary fs-5 mt-2">
                 <p> Software Engineer</p>
                 <p class="text-dark">About</p>
-                <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
-                    nec odio a arcu pharetra
-                    vehicula. Integer tempus erat in odio suscipit vestibulum.
-                </p>
+                <p>{{UserDataObj.bio}}</p>
             </div>
         </div>
     </div>
