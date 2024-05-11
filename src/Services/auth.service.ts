@@ -10,8 +10,16 @@ import { Observable } from 'rxjs';
 })
 export class AuthService {
   // Replace with your API URL
+  private queryParams: { [key: string]: string } = {};
 
   constructor(private http: HttpClient, private router: Router) {}
+  setQueryParams(params: { [key: string]: string }): void {
+    this.queryParams = params;
+  }
+
+  getQueryParam(key: string): string {
+    return this.queryParams[key];
+  }
 
   login(credentials: { email: string, password: string }): Observable<any> {
     return this.http.post<any>(`http://localhost:5017/api/Account/login`, credentials);

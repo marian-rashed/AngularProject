@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router, RouterLink, RouterOutlet } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink, RouterOutlet } from '@angular/router';
 import { AuthService } from '../../Services/auth.service';
 import { FormsModule } from '@angular/forms';
 
@@ -13,6 +13,7 @@ import { FormsModule } from '@angular/forms';
 })
 export class LogInComponent {
   credentials = { email: '', password: '' };
+  route: ActivatedRoute | null | undefined;
 
   constructor(private authService: AuthService, private router: Router) {}
 
@@ -26,10 +27,14 @@ export class LogInComponent {
 
   signIn(): void {
     this.authService.login(this.credentials).subscribe(
-      
       (response) => {
         this.authService.setToken(response.token); // Store token in localStorage
-        this.router.navigate(['/home'], { queryParams: { email: this.credentials.email }}); // Redirect to home page
+
+        // Set query parameters to be accessed by all components
+        this.authService.setQueryParams({ email: this.credentials.email });
+
+        // Redirect to the home component
+        this.router.navigate(['/home']);
       },
       (error) => {
         console.log('Login failed:', error);
