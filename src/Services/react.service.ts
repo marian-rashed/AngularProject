@@ -14,5 +14,8 @@ export class ReactService {
   addReact(newReact: React): Observable<React> {
     return this._HttpClient.post<React>("http://localhost:5017/api/React", newReact);
   }
+  EditReact(reactid: number, updatedReact: React): Observable<React> {
+    return this._HttpClient.put<React>(`http://localhost:5017/api/React?id=${reactid}`, updatedReact);
+  }
   
 }

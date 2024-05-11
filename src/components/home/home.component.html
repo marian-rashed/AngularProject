@@ -84,38 +84,43 @@
                                 <img *ngIf="isPostImageString(item)" [src]="item.postImage">
 
 
-
-
                                 <!-- reaction section -->
                                 <!-- like  -->
                                 <div class=" d-flex justify-content-between  w-25  mt-2">
 
-                                    <a class="d-flex align-items-center me-3 text-decoration-none" (click)="addReact(item.id, true)">
-                                        <i class="fa-regular fa-thumbs-up fa-xl" style="color: #2e2e2e;"></i>
+                                    <!-- like  -->
+                                    <a class="d-flex align-items-center me-3 text-decoration-none"
+                                        (click)="updateReactValue(item.id, true)">
+                                        <i class="fa-regular fa-thumbs-up fa-xl" style="color: #2e2e2e;"
+                                            [ngClass]="{'liked': isCurrentUserLiked(item.id), 'disliked': isCurrentUserDisliked(item.id)}"></i>
                                     </a>
-                                    <!-- Dislike -->
-                                    <a  class="d-flex align-items-center me-3 text-decoration-none" (click)="addReact(item.id, false)">
-                                        <i class="fa-regular fa-thumbs-down fa-xl" style="color: #2e2e2e;"></i>
+                                    <span style="margin-right: 2rem;">{{ reactOnPost[item.id]?.likeCount }}</span>
+                                    <!-- dislike -->
+                                    <a class="d-flex align-items-center me-3 text-decoration-none"
+                                        (click)="updateReactValue(item.id, false)">
+                                        <i class="fa-regular fa-thumbs-down fa-xl" style="color: #2e2e2e;"
+                                            [ngClass]="{'liked': isCurrentUserDisliked(item.id), 'disliked': isCurrentUserLiked(item.id)}"></i>
                                     </a>
-                                    <!-- show reacts list -->
-                                    <button class="btn btn-light" (click)="showReactList(item)">
-                                        <i class="fas fa-list fa-xl" style="color: #2e2e2e;"></i>
-                                    </button>
+                                    <span style="margin-right: 2rem;">{{ reactOnPost[item.id]?.dislikeCount }}</span>
+
+
                                     <div *ngIf="reacts.length > 0" class="reacts-list">
                                         <h5>Reacts:</h5>
                                         <ul>
                                             <li *ngFor="let react of reacts">
-                                                <i *ngIf="react.value" class="fa-regular fa-thumbs-up" style="color: #2e2e2e;"></i>
-                                                <i *ngIf="!react.value" class="fa-regular fa-thumbs-down" style="color: #2e2e2e;"></i>
+                                                <i *ngIf="react.value" class="fa-regular fa-thumbs-up"
+                                                    style="color: #2e2e2e;"></i>
+                                                <i *ngIf="!react.value" class="fa-regular fa-thumbs-down"
+                                                    style="color: #2e2e2e;"></i>
                                                 <!-- Display additional react information here if needed -->
                                             </li>
                                         </ul>
                                     </div>
                                     <!-- comment -->
-                                    <a href="#" class="d-flex align-items-center me-3  text-decoration-none">
+                                    <button class="d-flex align-items-center me-3  text-decoration-none border-none" data-toggle="modal" data-target="#exampleModal">
                                         <i class="far fa-comment-dots me-2 fa-xl" style="color: #2e2e2e;"></i>
 
-                                    </a>
+                                    </button>
 
                                     <!-- share -->
                                     <a href="#!" class="d-flex align-items-center me-3 text-decoration-none">
@@ -134,9 +139,9 @@
 
                                     <!-- comment textbox -->
                                     <div class="d-flex justify-content-between align-items-center w-100">
-                                        <textarea class="form-control border rounded-5 mr-2" style="width: 90%;"
-                                            aria-label="With textarea" placeholder="Leave comment here!"></textarea>
-                                        <a href="#">
+                                        <input  [(ngModel)] ="this.CommentContent" class="form-control border rounded-5 mr-2" style="width: 90%;"
+                                            aria-label="With textarea" placeholder="Leave comment here!" />
+                                        <a (click)="onCreateNewComment(item.id)">
                                             <i class="fa-solid fa-paper-plane fa-2xl" style="color: #ffffff;"></i>
                                         </a>
 
@@ -147,7 +152,7 @@
                                 <!-- post comments  -->
 
                                 <div class=" mt-5" style=" max-height: 200px; overflow-y: auto;">
-                                    <div class="card rounded-5">
+                                  <div class="card rounded-5">
                                         <div class="card-body">
                                             <div class="row">
                                                 <div class="col-md-3">
@@ -177,7 +182,22 @@
                                                         </p>
                                                     </div>
                                                 </div>
+
                                             </div>
+                                            <div class="dropdown" style="position: absolute; top: 0; right: 0;">
+                                              <button class="btn  dropdown-toggle" type="button" id="dropdownMenuButton"
+                                                  data-bs-toggle="dropdown" aria-expanded="false">
+                                                  <!-- Three dots icon -->
+                                                  <i class="fas fa-ellipsis-v"></i>
+                                              </button>
+                                              <!-- Dropdown menu items -->
+                                              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                  <!-- Edit post option -->
+                                                  <li><a class="dropdown-item">Edit</a></li>
+                                                  <!-- Delete post option -->
+                                                  <li><a class="dropdown-item">Delete</a></li>
+                                              </ul>
+                                          </div>
                                         </div>
                                     </div>
                                 </div>
@@ -236,3 +256,5 @@
         </div>
     </div>
 </div>
+
+
