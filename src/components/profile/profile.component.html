@@ -37,14 +37,10 @@
     <div class="col-lg-12 bg-light">
 
         <div class="p-4 ">
-            <h2>Khloud Farouk</h2>
+            <h2>{{UserDataObj.name}}</h2>
             <div class="text-secondary fs-5 mt-2">
-                <p> Software Engineer</p>
                 <p class="text-dark">About</p>
-                <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
-                    nec odio a arcu pharetra
-                    vehicula. Integer tempus erat in odio suscipit vestibulum.
-                </p>
+                <p>{{UserDataObj.bio}}</p>
             </div>
         </div>
     </div>
@@ -58,7 +54,7 @@
         <div class="col-lg-8">
             <h3 class="p-4"> My Posts</h3>
 
-            <div class="card w-100">
+            <div class="card w-100" *ngFor="let post of UserPosts">
                 <div class="card-body ">
                     <!-- Your posts content here -->
                     <!-- Post Input Section -->
@@ -75,14 +71,15 @@
                             alt="avatar" width="80" height="80">
                         <div>
                             <!-- User Name -->
-                            <h6 class="fw-bold text-dark mb-1">Hager Ibrahim</h6>
-                            <p class="text-muted small mb-0">Timestamp</p>
+                            <h6 class="fw-bold text-dark mb-1">{{UserDataObj.name}}</h6>
+                            <p class="text-muted small mb-0">{{post.postTime}}</p>
                         </div>
                     </div>
                     <!-- Post Content -->
-                    <p class="mt-3 mb-4 pb-2">Post content goes here.</p>
+                    <p class="mt-3 mb-4 pb-2">{{post.content}}</p>
                     <!-- Post Image (if any) -->
-                    <img src="../../assets/Images/background.png" alt="Post Image" class="mb-3 rounded"
+                    <img src="../../assets/Images/post-image.jpg" alt="Post Image" class="mb-3 rounded"
+
                         style="max-width: 100%; height: auto;">
                     <!-- Reaction Section -->
                     <div class="d-flex justify-content-between w-25 mt-2">
