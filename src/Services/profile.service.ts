@@ -17,6 +17,6 @@ export class ProfileService {
 
   GetUserPosts(loggedInUserId: string|any):Observable<any[]>
   {
-    return this.httpclient.get<any[]>(`http://localhost:5017/api/posts/user/8b475933-7115-4eb0-894c-124717a5d220`)
+    return this.httpclient.get<any[]>(`http://localhost:5017/api/posts/user/${loggedInUserId}`)
   }
 }
