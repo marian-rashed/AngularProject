@@ -117,10 +117,12 @@
                                         </ul>
                                     </div>
                                     <!-- comment -->
-                                    <button class="d-flex align-items-center me-3  text-decoration-none border-none" data-toggle="modal" data-target="#exampleModal">
+                                    <button class="d-flex align-items-center me-3  text-decoration-none border-none"
+                                        (click)="toggleComments(item)" data-toggle="modal" data-target="#exampleModal">
                                         <i class="far fa-comment-dots me-2 fa-xl" style="color: #2e2e2e;"></i>
 
                                     </button>
+
 
                                     <!-- share -->
                                     <a href="#!" class="d-flex align-items-center me-3 text-decoration-none">
@@ -139,7 +141,8 @@
 
                                     <!-- comment textbox -->
                                     <div class="d-flex justify-content-between align-items-center w-100">
-                                        <input  [(ngModel)] ="this.CommentContent" class="form-control border rounded-5 mr-2" style="width: 90%;"
+                                        <input [(ngModel)]="this.CommentContent"
+                                            class="form-control border rounded-5 mr-2" style="width: 90%;"
                                             aria-label="With textarea" placeholder="Leave comment here!" />
                                         <a (click)="onCreateNewComment(item.id)">
                                             <i class="fa-solid fa-paper-plane fa-2xl" style="color: #ffffff;"></i>
@@ -151,56 +154,79 @@
 
                                 <!-- post comments  -->
 
-                                <div class=" mt-5" style=" max-height: 200px; overflow-y: auto;">
-                                  <div class="card rounded-5">
+                                <!-- Comments section -->
+                                <div *ngIf="selectedPostId === item.id" class="mt-5"
+                                    style="max-height: 200px; overflow-y: auto;">
+                                    <div class="card rounded-5">
+
                                         <div class="card-body">
-                                            <div class="row">
-                                                <div class="col-md-3">
-                                                    <img src="https://image.ibb.co/jw55Ex/def_face.jpg"
-                                                        class="img img-rounded img-fluid" width="90" height="90" />
-                                                    <p class="text-secondary mt-1">15 Minutes Ago</p>
+                                            <!-- Iterate over CommentsForPost array and display each comment -->
+                                            <div *ngFor="let comment of CommentsForPost" class="card mb-3">
+                                                <p class="fs-5" *ngIf="selectedComment !== comment">{{ updatedComment.content}}</p>
+                                                <!-- Display input field for editing when comment is selected -->
+                                                <textarea *ngIf="selectedComment === comment" class="form-control"
+                                                    [(ngModel)]="updatedComment.content"></textarea>
+                                                <!-- Display Edit and Cancel buttons -->
+                                                <div *ngIf="selectedComment && selectedComment.id === comment.id">
+                                                    
+                                                    <button class="btn btn-primary me-2"
+                                                        (click)="saveEditComment()">Save</button>
+                                                    <button class="btn btn-secondary"
+                                                        (click)="cancelEditComment()">Cancel</button>
                                                 </div>
-                                                <div class="col-md-9">
-                                                    <p>
-                                                        <a class="float-left text-decoration-none text-dark">
-                                                            <h5>Khloud Farouk</h5>
-                                                        </a>
-                                                    </p>
-                                                    <div class="clearfix"></div>
-                                                    <!-- display comment -->
-                                                    <p class="fs-5">This is a great post keep going !</p>
+                                                <div class="card-body">
+                                                    <div class="row">
+                                                        <!-- User image -->
+                                                        <div class="col-md-3">
+                                                            <img src="https://image.ibb.co/jw55Ex/def_face.jpg"
+                                                                class="img img-rounded img-fluid" width="90"
+                                                                height="90" />
 
-                                                    <div class="d-flex justify-content-between w-100">
-                                                        <p>
-
-                                                            <a class=" btn btn-outline-success">
-                                                                <i class="fa fa-reply"></i> Reply
-                                                            </a>
-                                                            <a class=" btn text-white btn-danger">
-                                                                <i class="fa fa-heart"></i> Like
-                                                            </a>
-                                                        </p>
+                                                        </div>
+                                                        <div class="col-md-9">
+                                                            <p>
+                                                                <a class="float-left text-decoration-none text-dark">
+                                                                    <h5>Username</h5>
+                                                                </a>
+                                                            </p>
+                                                            <div class="clearfix"></div>
+                                                            <!-- Display comment content -->
+                                                            <p class="fs-5">{{ comment.content }}</p>
+                                                            <!-- Edit and delete options -->
+                                                            <div
+                                                                class="d-flex justify-content-between align-items-center w-100">
+                                                                <div class="dropdown"
+                                                                    style="position: absolute; top: 0; right: 0;">
+                                                                    <button class="btn dropdown-toggle" type="button"
+                                                                        id="dropdownMenuButton"
+                                                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                                                        <!-- Three dots icon -->
+                                                                        <i class="fas fa-ellipsis-v"></i>
+                                                                    </button>
+                                                                    <!-- Dropdown menu items -->
+                                                                    <ul class="dropdown-menu"
+                                                                        aria-labelledby="dropdownMenuButton">
+                                                                        <!-- Edit comment option -->
+                                                                        <li><a class="dropdown-item"
+                                                                                (click)="editComment(comment)">Edit</a>
+                                                                        </li>
+                                                                        <!-- Delete comment option -->
+                                                                        <li><a class="dropdown-item"
+                                                                                (click)="deleteComment(comment)">Delete</a>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
-
                                             </div>
-                                            <div class="dropdown" style="position: absolute; top: 0; right: 0;">
-                                              <button class="btn  dropdown-toggle" type="button" id="dropdownMenuButton"
-                                                  data-bs-toggle="dropdown" aria-expanded="false">
-                                                  <!-- Three dots icon -->
-                                                  <i class="fas fa-ellipsis-v"></i>
-                                              </button>
-                                              <!-- Dropdown menu items -->
-                                              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                  <!-- Edit post option -->
-                                                  <li><a class="dropdown-item">Edit</a></li>
-                                                  <!-- Delete post option -->
-                                                  <li><a class="dropdown-item">Delete</a></li>
-                                              </ul>
-                                          </div>
+
+
                                         </div>
                                     </div>
                                 </div>
+
 
 
 
@@ -233,10 +259,10 @@
                     <div class="card-container sugess-cont">
 
                         <div class="card  sugesscard" *ngFor="let user of users">
-                            
+
                             <img class="user-image" [src]="user.imageUrl" alt="User Image">
-                            
-                           
+
+
                             <div class="user-details">
                                 <h6>{{ user.name }}</h6>
                                 <p>{{ user.email }}</p>
@@ -247,7 +273,7 @@
                                 <a>
                                     <i class="fa-regular fa-square-plus fa-2xl"></i>
                                 </a>
-                                
+
                             </div>
                         </div>
                     </div>
@@ -256,5 +282,3 @@
         </div>
     </div>
 </div>
-
-
