@@ -12,6 +12,7 @@ import { forkJoin } from 'rxjs';
 import { CommentService } from '../../Services/comment.service';
 import { Comment } from '../../Interfaces/comment';
 import { FormsModule } from "@angular/forms";
+declare var $: any;
 @Component({
   selector: 'app-home',
   standalone: true,
@@ -63,7 +64,7 @@ export class HomeComponent implements OnInit {
   };
   reacts: React[] = [];
   newReact: React = { id: 0, value: true, userId: '', postId: 0 };
-  newComment: Comment = { id: 0, content: '', userId: '', postId: 0 };
+  newComment: Comment = { id: 0, content: '', userId: '', postId: 0,commentTime:"2024-05-11T19:22:55.413Z" };
   CommentContent:string = '';
   loggedInUserId: string = '';
   email: string | null = null;
@@ -76,11 +77,21 @@ export class HomeComponent implements OnInit {
     postImage: '',
     postTime: '',
   }; // To store the updated post data
+  selectedComment: Comment | null = null; 
+updatedComment: Comment = 
+{
+  id:0,
+  content:"",
+  commentTime:"",
+  postId:0,
+  userId:""
+};
   showReactListFlag: boolean = false;
   reactOnPost: {
     [postId: number]: { likeCount: number; dislikeCount: number };
   } = {};
   CommentsForPost:Comment[] = [];
+  selectedPostId: number | null = null;
   constructor(
     private _PostsServiceService: PostsServiceService,
     private _ReactService: ReactService,
@@ -136,6 +147,7 @@ export class HomeComponent implements OnInit {
       'en-US'
     );
     this.newPost.postTime = formattedDate;
+    this.newComment.commentTime=formattedDate;
   }
 
   fetchLoggedInUserId(): void {
@@ -350,10 +362,10 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  deleteComment(CommentId: number) {
-    this._CommentService.DeleteComment(CommentId).subscribe({
+  deleteComment(Comment: Comment) {
+    this._CommentService.DeleteComment(Comment.id).subscribe({
       next:()=>{
-
+        this.getCommentsbyPost(Comment.postId);
       },
       error:(err)=>{
         console.log(err)
@@ -361,10 +373,41 @@ export class HomeComponent implements OnInit {
     })
   }
   //missing the front (html)
-  editComment(Comment: Comment) {
-    Comment.content = this.CommentContent;
-    this._CommentService.EditComment(Comment.id, Comment);
+  
+  editComment(comment: Comment): void {
+    this.selectedComment = comment;
+    this.updatedComment.content = comment.content;
+    this.selectedComment.id=comment.id;
   }
+  
+  updateCommentContent(event: any): void {
+    const target = event.target as HTMLTextAreaElement;
+    this.updatedComment.content = target.value; // Update updatedCommentContent when input changes
+  }
+  
+  cancelEditComment(): void {
+    this.selectedComment = null;
+    this.updatedComment.content = '';
+  }
+  
+  saveEditComment(): void {
+    if (this.selectedComment) {
+      this.selectedComment.content = this.updatedComment.content;
+      this._CommentService
+        .EditComment(this.selectedComment.id, this.selectedComment)
+        .subscribe({
+          next: () => {
+            this.selectedComment = null;
+            this.updatedComment.content = '';
+          },
+          error: (err) => {
+            console.log(err);
+          },
+        });
+    }
+  }
+
+
 // get comment by post id missing the front (html) implemntation
 // i thing the right way is when i click on comment icon it is open a model contain commnt
   getCommentsbyPost(postid:number) {
@@ -377,4 +420,16 @@ export class HomeComponent implements OnInit {
       }
     })
   }
+
+  toggleComments(post: Post): void {
+    // If the clicked post is already selected, deselect it
+    if (this.selectedPostId === post.id) {
+        this.selectedPostId = null;
+        this.CommentsForPost = [];
+    } else {
+        
+        this.selectedPostId = post.id;
+        this.getCommentsbyPost(post.id);
+    }
+}
 }
