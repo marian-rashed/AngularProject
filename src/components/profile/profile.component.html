@@ -4,29 +4,30 @@
             <!-- Profile Cover Image -->
             <div class="position-relative bg-dark" style="height: 300px;">
                 <!-- Cover Image -->
-                <img src="https://img.freepik.com/free-photo/high-angle-shot-buildings-cloudy-sky-captured-kenya-nairobi-samburu_181624-8111.jpg?t=st=1715004108~exp=1715007708~hmac=cac79e74085899a8bc16a4a44d47f2be03112d18bb9fa8d51394498eb93f769f&w=740"
+                <img [src]="UserDataObj.coverImage"
                     alt="Cover Image" class="w-100 h-100 object-fit-cover">
                 <!-- Personal Image -->
-                <img src="../../assets/Images/hagar.jpg" alt="Personal Image" class="position-absolute"
+                <img [src]="UserDataObj.profileImage" alt="Personal Image" class="position-absolute"
                     style="bottom: 20px; left: 20px; border: 5px solid white; border-radius: 50%; width: 150px; height: 150px;">
-                
 
 
+
+                <!-- Camera icon for changing cover photo -->
                 <div class="position-absolute" style="top: 20px; right: 20px;">
-                    <!-- icon for changing cover photo -->
-                    <a>
+                    <label for="coverPhotoInput">
                         <i class="fa-solid fa-camera fa-2xl" style="color:white;"></i>
-                    </a>
-                   
-
+                    </label>
+                    <input type="file" id="coverPhotoInput" style="display: none"
+                        (change)="onCoverPhotoSelected($event)">
                 </div>
 
+                <!-- Camera icon for changing personal photo -->
                 <div class="position-absolute" style="bottom:35px;  left: 45px;">
-                    <!-- icon for changing personal photo -->
-                    <a>
-                        <i class="fa-solid fa-camera fa-2xl " style="color: white;"></i>
-                    </a>
-                   
+                    <label for="personalPhotoInput">
+                        <i class="fa-solid fa-camera fa-2xl" style="color: white;"></i>
+                    </label>
+                    <input type="file" id="personalPhotoInput" style="display: none"
+                        (change)="onPersonalPhotoSelected($event)">
                 </div>
             </div>
         </div>
@@ -37,12 +38,15 @@
     <div class="col-lg-12 bg-light">
 
         <div class="p-4 ">
-            <h2>{{UserDataObj.name}}</h2>
+            <h2>{{UserDataObj.userName}}</h2>
             <div class="text-secondary fs-5 mt-2">
                 <p class="text-dark">About</p>
-                <p>{{UserDataObj.bio}}</p>
+                <P>{{updatedUserData.bio}}</P>
+                <input type="text" [(ngModel)]="newBio" class="form-control mb-2" placeholder="Edit Bio">
+                <button class="btn btn-primary" (click)="updateBio()">Save Bio</button>
             </div>
         </div>
+        
     </div>
 
 
@@ -67,11 +71,11 @@
 
                     <div class="d-flex flex-start align-items-center">
                         <!-- User Image -->
-                        <img class="rounded-circle shadow-1-strong me-3" src="../../assets/Images/hagar.jpg"
+                        <img class="rounded-circle shadow-1-strong me-3" [src]="updatedUserData.profileIamge"
                             alt="avatar" width="80" height="80">
                         <div>
                             <!-- User Name -->
-                            <h6 class="fw-bold text-dark mb-1">{{UserDataObj.name}}</h6>
+                            <h6 class="fw-bold text-dark mb-1">{{UserDataObj.userName}}</h6>
                             <p class="text-muted small mb-0">{{post.postTime}}</p>
                         </div>
                     </div>
@@ -79,7 +83,6 @@
                     <p class="mt-3 mb-4 pb-2">{{post.content}}</p>
                     <!-- Post Image (if any) -->
                     <img src="../../assets/Images/post-image.jpg" alt="Post Image" class="mb-3 rounded"
-
                         style="max-width: 100%; height: auto;">
                     <!-- Reaction Section -->
                     <div class="d-flex justify-content-between w-25 mt-2">
@@ -140,9 +143,6 @@
                     <!-- End Post Comments -->
                 </div>
                 <!-- End Comments Section -->
-
-
-
 
 
             </div>
