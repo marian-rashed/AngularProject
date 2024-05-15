@@ -58,82 +58,223 @@
         <div class="col-lg-8">
             <h3 class="p-4"> My Posts</h3>
 
-            <div class="card w-100" *ngFor="let post of UserPosts">
+            <div  *ngFor="let post of UserPosts">
                 
-                <div class="card-body ">
-                    <div class="d-flex flex-start align-items-center">
-                        <!-- User Image -->
-                        <img class="rounded-circle shadow-1-strong me-3" [src]="updatedUserData.profileIamge"
-                            alt="avatar" width="80" height="80">
-                        <div>
-                            <!-- User Name -->
-                            <h6 class="fw-bold text-dark mb-1">{{UserDataObj.userName}}</h6>
-                            <p class="text-muted small mb-0">{{post.postTime}}</p>
-                        </div>
-                    </div>
-                    <!-- Post Content -->
-                    <p class="mt-3 mb-4 pb-2">{{post.content}}</p>
-                    <!-- Post Image (if any) -->
-                    <img src="../../assets/Images/post-image.jpg" alt="Post Image" class="mb-3 rounded"
-                        style="max-width: 100%; height: auto;">
-                    <!-- Reaction Section -->
-                    <div class="d-flex justify-content-between w-25 mt-2">
-                        <a href="#!" class="d-flex align-items-center me-3 text-decoration-none"><i
-                                class="fa-regular fa-thumbs-up fa-xl" style="color: #2e2e2e;"></i></a>
-                        <a href="#!" class="d-flex align-items-center me-3 text-decoration-none"><i
-                                class="far fa-comment-dots me-2 fa-xl" style="color: #2e2e2e;"></i></a>
-                        <a href="#!" class="d-flex align-items-center me-3 text-decoration-none"><i
-                                class="fas fa-share me-2 fa-xl" style="color: #2e2e2e;"></i></a>
+                <div *ngIf="selectedPost && selectedPost.id === post.id" class="card">
+                    <div class="card-body">
+                        <textarea class="rounded-5 form-control mb-3" aria-label="With textarea"
+                            placeholder="What's happening?"
+                            (input)="updateContent($event)">{{ updatedPost.content }}</textarea>
+                        <input id="imageInput" type="file" (change)="handleImageInput($event)" accept="image/*"
+                            style="display: none;">
+                        <label for="imageInput">
+                            <i class="fa-solid fa-camera fa-2xl" style="color: #2e2e2e; cursor: pointer;"></i>
+                        </label>
+                        <button class="btn btn-primary me-2" (click)="saveEdit()">Save</button>
+                        <button class="btn btn-secondary" (click)="cancelEdit()">Cancel</button>
                     </div>
                 </div>
-                <!-- Comments Section -->
-                <div class="card-footer py-3 mt-3" style="background-color: #00BD97;">
-                    <div class="d-flex flex-start w-100">
-                        <!-- Commenter's Image -->
-                        <img class="rounded-circle shadow-1-strong me-3" src="../../assets/Images/hagar.jpg"
-                            alt="avatar" width="70" height="70">
-                        <!-- Comment Input -->
-                        <div class="d-flex justify-content-between align-items-center w-100">
-                            <textarea class="form-control border rounded-5 mr-2" style="width: 90%;"
-                                aria-label="With textarea" placeholder="Leave comment here!"></textarea>
-                            <a href="#"><i class="fa-solid fa-paper-plane fa-2xl" style="color: #ffffff;"></i></a>
-                        </div>
-                    </div>
-                    <!-- Post Comments -->
-                    <div class="mt-5" style="max-height: 200px; overflow-y: auto;">
-                        <div class="card rounded-5">
+                <div *ngIf="!selectedPost || selectedPost.id !== post.id" class=" d-flex justify-content-center card">
+                    <div class="">
+                        <div >
                             <div class="card-body">
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <!-- Commenter's Image -->
-                                        <img src="https://image.ibb.co/jw55Ex/def_face.jpg"
-                                            class="img img-rounded img-fluid" width="90" height="90">
-                                        <!-- Comment Timestamp -->
-                                        <p class="text-secondary mt-1">15 Minutes Ago</p>
+                                <div class="dropdown" style="position: absolute; top: 0; right: 0;">
+                                    <button class="btn  dropdown-toggle" type="button" id="dropdownMenuButton"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        <!-- Three dots icon -->
+                                        <i class="fas fa-ellipsis-v"></i>
+                                    </button>
+                                    <!-- Dropdown menu items -->
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <!-- Edit post option -->
+                                        <li><a class="dropdown-item" (click)="editPost(post)">Edit</a></li>
+                                        <!-- Delete post option -->
+                                        <li><a class="dropdown-item" (click)="deletePost(post)">Delete</a></li>
+                                    </ul>
+                                </div>
+
+                                <div class="d-flex flex-start align-items-center">
+                                    <!-- user image -->
+                                    <img class="rounded-circle shadow-1-strong me-3" src="../../assets/Images/hagar.jpg"
+                                        alt="avatar" width="80" height="80" />
+                                    <div>
+                                        <!-- user name -->
+                                        <h6 class="fw-bold text-dark mb-1">Hager Ibrahim</h6>
+                                        <p class="text-muted small mb-0">
+                                            {{post.postTime}}
+                                        </p>
                                     </div>
-                                    <div class="col-md-9">
-                                        <!-- Commenter's Name -->
-                                        <p><a class="float-left text-decoration-none text-dark">
-                                                <h5>Khloud Farouk</h5>
-                                            </a></p>
-                                        <div class="clearfix"></div>
-                                        <!-- Comment Content -->
-                                        <p class="fs-5">This is a great post keep going!</p>
-                                        <!-- Reply and Like Buttons -->
-                                        <div class="d-flex justify-content-between w-100">
-                                            <p>
-                                                <a class="btn btn-outline-success"><i class="fa fa-reply"></i> Reply</a>
-                                            
-                                            </p>
+                                </div>
+
+                                <p class="mt-3 mb-4 pb-2">
+                                    {{post.content}}
+                                </p>
+                                <img  class="w-100" *ngIf="isPostImageString(post)" [src]="post.postImage">
+
+
+                                <!-- reaction section -->
+                                <!-- like  -->
+                                <div class=" d-flex justify-content-between  w-25  mt-3">
+
+                                    <!-- like  -->
+                                    <a class="d-flex align-items-center me-3 text-decoration-none"
+                                        (click)="updateReactValue(post.id, true)">
+                                        <i class="fa-regular fa-thumbs-up fa-xl" style="color: #2e2e2e;"
+                                            [ngClass]="{'liked': isCurrentUserLiked(post.id), 'disliked': isCurrentUserDisliked(post.id)}"></i>
+                                    </a>
+                                    <span style="margin-right: 2rem;">{{ reactOnPost[post.id]?.likeCount }}</span>
+                                    <!-- dislike -->
+                                    <a class="d-flex align-items-center me-3 text-decoration-none"
+                                        (click)="updateReactValue(post.id, false)">
+                                        <i class="fa-regular fa-thumbs-down fa-xl" style="color: #2e2e2e;"
+                                            [ngClass]="{'liked': isCurrentUserDisliked(post.id), 'disliked': isCurrentUserLiked(post.id)}"></i>
+                                    </a>
+                                    <span style="margin-right: 2rem;">{{ reactOnPost[post.id]?.dislikeCount }}</span>
+
+
+                                    <div *ngIf="reacts.length > 0" class="reacts-list">
+                                        <h5>Reacts:</h5>
+                                        <ul>
+                                            <li *ngFor="let react of reacts">
+                                                <i *ngIf="react.value" class="fa-regular fa-thumbs-up"
+                                                    style="color: #2e2e2e;"></i>
+                                                <i *ngIf="!react.value" class="fa-regular fa-thumbs-down"
+                                                    style="color: #2e2e2e;"></i>
+                                                <!-- Display additional react information here if needed -->
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <!-- comment -->
+                                    <button class="d-flex align-items-center me-3  text-decoration-none border-none"
+                                        (click)="toggleComments(post)" data-toggle="modal" data-target="#exampleModal">
+                                        <i class="far fa-comment-dots me-2 fa-xl" style="color: #2e2e2e;"></i>
+
+                                    </button>
+
+
+                                    <!-- share -->
+                                    <a href="#!" class="d-flex align-items-center me-3 text-decoration-none">
+                                        <i class="fas fa-share me-2 fa-xl" style="color: #2e2e2e;"></i>
+
+                                    </a>
+                                </div>
+
+
+                            </div>
+                            <!-- adding comments section -->
+                            <div class="card-footer py-3  mt-3" style="background-color: #00BD97;">
+                                <div class="d-flex flex-start w-100">
+                                    <img class="rounded-circle shadow-1-strong me-3" src="../../assets/Images/hagar.jpg"
+                                        alt="avatar" width="70" height="70" />
+
+                                    <!-- comment textbox -->
+                                    <div class="d-flex justify-content-between align-items-center w-100">
+                                        <input [(ngModel)]="this.CommentContent"
+                                            class="form-control border rounded-5 mr-2" style="width: 90%;"
+                                            aria-label="With textarea" placeholder="Leave comment here!" />
+                                        <a (click)="onCreateNewComment(post.id)">
+                                            <i class="fa-solid fa-paper-plane fa-2xl" style="color: #ffffff;"></i>
+                                        </a>
+
+                                    </div>
+
+                                </div>
+
+                                <!-- post comments  -->
+
+                                <!-- Comments section -->
+                                <div *ngIf="selectedPostId === post.id" class="mt-5"
+                                    style="max-height: 200px; overflow-y: auto;">
+                                    <div class="card rounded-5">
+
+                                        <div class="card-body">
+                                            <!-- Iterate over CommentsForPost array and display each comment -->
+                                            <div *ngFor="let comment of CommentsForPost" class="card mb-3">
+                                                <p class="fs-5" *ngIf="selectedComment !== comment">{{ updatedComment.content}}</p>
+                                                <!-- Display input field for editing when comment is selected -->
+                                                <textarea *ngIf="selectedComment === comment" class="form-control"
+                                                    [(ngModel)]="updatedComment.content"></textarea>
+                                                <!-- Display Edit and Cancel buttons -->
+                                                <div *ngIf="selectedComment && selectedComment.id === comment.id">
+
+                                                    <button class="btn btn-primary me-2"
+                                                        (click)="saveEditComment()">Save</button>
+                                                    <button class="btn btn-secondary"
+                                                        (click)="cancelEditComment()">Cancel</button>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="row">
+                                                        <!-- User image -->
+                                                        <div class="col-md-3">
+                                                            <img src="https://image.ibb.co/jw55Ex/def_face.jpg"
+                                                                class="img img-rounded img-fluid" width="90"
+                                                                height="90" />
+
+                                                        </div>
+                                                        <div class="col-md-9">
+                                                            <p>
+                                                                <a class="float-left text-decoration-none text-dark">
+                                                                    <h5>Username</h5>
+                                                                </a>
+                                                            </p>
+                                                            <div class="clearfix"></div>
+                                                            <!-- Display comment content -->
+                                                            <p class="fs-5">{{ comment.content }}</p>
+                                                            <div class="d-flex justify-content-between w-100">
+                                                                <p>
+                                                                    <a class="btn btn-outline-success"><i class="fa fa-reply"></i> Reply</a>
+
+                                                                </p>
+                                                            </div>
+                                                            <!-- Edit and delete options -->
+                                                            <div
+                                                                class="d-flex justify-content-between align-items-center w-100">
+                                                                <div class="dropdown"
+                                                                    style="position: absolute; top: 0; right: 0;">
+                                                                    <button class="btn dropdown-toggle" type="button"
+                                                                        id="dropdownMenuButton"
+                                                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                                                        <!-- Three dots icon -->
+                                                                        <i class="fas fa-ellipsis-v"></i>
+                                                                    </button>
+                                                                    <!-- Dropdown menu items -->
+                                                                    <ul class="dropdown-menu"
+                                                                        aria-labelledby="dropdownMenuButton">
+                                                                        <!-- Edit comment option -->
+                                                                        <li><a class="dropdown-item"
+                                                                                (click)="editComment(comment)">Edit</a>
+                                                                        </li>
+                                                                        <!-- Delete comment option -->
+                                                                        <li><a class="dropdown-item"
+                                                                                (click)="deleteComment(comment)">Delete</a>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
                                         </div>
                                     </div>
                                 </div>
+
+
+
+
+                                <!-- End Post comments  -->
+
+
                             </div>
+
+
+                            <!-- comments section end -->
                         </div>
-                    </div>
-                    <!-- End Post Comments -->
+                    
                 </div>
-                <!-- End Comments Section -->
+            </div>
 
 
             </div>
