@@ -47,7 +47,7 @@
                     </div>
                 </div>
                 <div *ngIf="!selectedPost || selectedPost.id !== item.id" class=" d-flex justify-content-center">
-                    <div class="">
+                    <div class="w-100">
                         <div class="card">
                             <div class="card-body">
                                 <div class="dropdown" style="position: absolute; top: 0; right: 0;">
@@ -81,7 +81,7 @@
                                 <p class="mt-3 mb-4 pb-2">
                                     {{item.content}}
                                 </p>
-                                <img *ngIf="isPostImageString(item)" [src]="item.postImage">
+                                <img *ngIf="isPostImageString(item)" [src]="item.postImage" class="w-100 mb-4">
 
 
                                 <!-- reaction section -->
@@ -162,13 +162,14 @@
                                         <div class="card-body">
                                             <!-- Iterate over CommentsForPost array and display each comment -->
                                             <div *ngFor="let comment of CommentsForPost" class="card mb-3">
-                                                <p class="fs-5" *ngIf="selectedComment !== comment">{{ updatedComment.content}}</p>
+                                                <p class="fs-5" *ngIf="selectedComment !== comment">{{
+                                                    updatedComment.content}}</p>
                                                 <!-- Display input field for editing when comment is selected -->
                                                 <textarea *ngIf="selectedComment === comment" class="form-control"
                                                     [(ngModel)]="updatedComment.content"></textarea>
                                                 <!-- Display Edit and Cancel buttons -->
                                                 <div *ngIf="selectedComment && selectedComment.id === comment.id">
-                                                    
+
                                                     <button class="btn btn-primary me-2"
                                                         (click)="saveEditComment()">Save</button>
                                                     <button class="btn btn-secondary"
@@ -193,10 +194,50 @@
                                                             <!-- Display comment content -->
                                                             <p class="fs-5">{{ comment.content }}</p>
                                                             <div class="d-flex justify-content-between w-100">
-                                                                <p>
-                                                                    <a class="btn btn-outline-success"><i class="fa fa-reply"></i> Reply</a>
-                                                                
-                                                                </p>
+
+                                                                <button type="button" class="btn btn-primary"
+                                                                    data-bs-toggle="modal"
+                                                                    data-bs-target="#exampleModal">
+                                                                    <a><i class="fa fa-reply"></i> Reply</a>
+                                                                </button>
+
+
+
+
+                                                                <!-- modal of replay  -->
+                                                                <div class="modal fade" id="exampleModal" tabindex="-1"
+                                                                    aria-labelledby="exampleModalLabel"
+                                                                    aria-hidden="true">
+                                                                    <div class="modal-dialog">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h5 class="modal-title"
+                                                                                    id="exampleModalLabel">Replays</h5>
+                                                                                <button type="button" class="btn-close"
+                                                                                    data-bs-dismiss="modal"
+                                                                                    aria-label="Close"></button>
+                                                                            </div>
+                                                                            <!-- replays section -->
+                                                                            <div class="modal-body">
+                                                                                <div class="input-group">
+                                                                                    
+                                                                                    <input type="text" aria-label="Last name" class="form-control">
+                                                                                  </div>
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <button type="button"
+                                                                                    class="btn btn-secondary"
+                                                                                    data-bs-dismiss="modal">Close</button>
+                                                                                <button type="button"
+                                                                                    class="btn btn-primary">Save
+                                                                                    changes</button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+
+
                                                             </div>
                                                             <!-- Edit and delete options -->
                                                             <div
