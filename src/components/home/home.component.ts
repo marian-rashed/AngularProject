@@ -11,22 +11,21 @@ import { ReactService } from '../../Services/react.service';
 import { forkJoin } from 'rxjs';
 import { CommentService } from '../../Services/comment.service';
 import { Comment } from '../../Interfaces/comment';
-import { FormsModule } from "@angular/forms";
+import { FormsModule } from '@angular/forms';
 import { ReplayService } from '../../Services/replay.service';
 import { Replay } from '../../Interfaces/replay';
-import {SuggestionService} from '../../Services/suggestion.service';
-import {UserData}from '../../Interfaces/user-data';
+import { SuggestionService } from '../../Services/suggestion.service';
+import { UserData } from '../../Interfaces/user-data';
 declare var $: any;
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule,FormsModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
 })
 export class HomeComponent implements OnInit {
-
-  users = this._SuggestionService.getUserIds("200a41ca-db27-46d6-9b2d-2f8397f18252");
+  users: UserData[] = [];
   /*[
     {
       imageUrl: '../../assets/Images/hagar.jpg',
@@ -59,7 +58,7 @@ export class HomeComponent implements OnInit {
       email: 'jane@example.com',
     },
   ];*/
-  
+
   items: Post[] = [];
   newPost: Post = {
     userId: '',
@@ -70,8 +69,14 @@ export class HomeComponent implements OnInit {
   };
   reacts: React[] = [];
   newReact: React = { id: 0, value: true, userId: '', postId: 0 };
-  newComment: Comment = { id: 0, content: '', userId: '', postId: 0,commentTime:"2024-05-11T19:22:55.413Z" };
-  CommentContent:string = '';
+  newComment: Comment = {
+    id: 0,
+    content: '',
+    userId: '',
+    postId: 0,
+    commentTime: '2024-05-11T19:22:55.413Z',
+  };
+  CommentContent: string = '';
   loggedInUserId: string = '';
   email: string | null = null;
   selectedFile: File = new File([], '');
@@ -83,25 +88,24 @@ export class HomeComponent implements OnInit {
     postImage: '',
     postTime: '',
   }; // To store the updated post data
-  selectedComment: Comment | null = null; 
-updatedComment: Comment = 
-{
-  id:0,
-  content:"",
-  commentTime:"",
-  postId:0,
-  userId:""
-};
-  
+  selectedComment: Comment | null = null;
+  updatedComment: Comment = {
+    id: 0,
+    content: '',
+    commentTime: '',
+    postId: 0,
+    userId: '',
+  };
+
   reactOnPost: {
     [postId: number]: { likeCount: number; dislikeCount: number };
   } = {};
-  CommentsForPost:Comment[] = [];
+  CommentsForPost: Comment[] = [];
   selectedPostId: number | null = null;
-  RepliesForComment:Replay[] = [];
-  CommentIdForReplay:number = 0;
-  PostIdForReplay:number = 0;
-  ReplayContent:string = '';
+  RepliesForComment: Replay[] = [];
+  CommentIdForReplay: number = 0;
+  PostIdForReplay: number = 0;
+  ReplayContent: string = '';
   constructor(
     private _PostsServiceService: PostsServiceService,
     private _ReactService: ReactService,
@@ -109,13 +113,14 @@ updatedComment: Comment =
     private route: ActivatedRoute,
     private _CommentService: CommentService,
     private _ReplayService: ReplayService,
-    private _SuggestionService:SuggestionService
+    private _SuggestionService: SuggestionService
   ) {}
 
   ngOnInit(): void {
     this.loadPosts();
     this.initializeNewPost();
     this.fetchLoggedInUserId();
+    this.GetSuggestions();
   }
 
   reactsNumber(postid: number) {
@@ -159,25 +164,23 @@ updatedComment: Comment =
       'en-US'
     );
     this.newPost.postTime = formattedDate;
-    this.newComment.commentTime=formattedDate;
+    this.newComment.commentTime = formattedDate;
   }
 
   fetchLoggedInUserId(): void {
-
     this.email = this.authService.getQueryParam('email');
-      console.log(this.email);
+    console.log(this.email);
 
-      if (this.email) {
-        this.authService.getCurrentUser(this.email).subscribe({
-          next: (user) => {
-            this.loggedInUserId = user.userId;
-          },
-          error: (err) => {
-            console.log(err);
-          },
-        });
-      }
-    
+    if (this.email) {
+      this.authService.getCurrentUser(this.email).subscribe({
+        next: (user) => {
+          this.loggedInUserId = user.userId;
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
+    }
   }
 
   isPostImageString(item: any): boolean {
@@ -285,8 +288,6 @@ updatedComment: Comment =
     });
   }
 
-  
-
   addReact(postId: number, value: boolean): void {
     this.newReact.userId = this.loggedInUserId;
     this.newReact.postId = postId;
@@ -348,50 +349,50 @@ updatedComment: Comment =
     return userReaction ? userReaction.value === false : false;
   }
 
-  onCreateNewComment(postid:number) {
+  onCreateNewComment(postid: number) {
     this.newComment.content = this.CommentContent;
     //this.newComment.commentTime = Date.now().toLocaleString();
     this.newComment.postId = postid;
-    this.newComment.userId = this.loggedInUserId
+    this.newComment.userId = this.loggedInUserId;
     this._CommentService.addComment(this.newComment).subscribe({
-      next:() => {
-        console.log(this.newComment)
+      next: () => {
+        console.log(this.newComment);
       },
-      error:(err) => {
+      error: (err) => {
         console.log(err);
-        console.log(this.newComment)
-      }
+        console.log(this.newComment);
+      },
     });
   }
 
   deleteComment(Comment: Comment) {
     this._CommentService.DeleteComment(Comment.id).subscribe({
-      next:()=>{
+      next: () => {
         this.getCommentsbyPost(Comment.postId);
       },
-      error:(err)=>{
-        console.log(err)
-      }
-    })
+      error: (err) => {
+        console.log(err);
+      },
+    });
   }
   //missing the front (html)
-  
+
   editComment(comment: Comment): void {
     this.selectedComment = comment;
     this.updatedComment.content = comment.content;
-    this.selectedComment.id=comment.id;
+    this.selectedComment.id = comment.id;
   }
-  
+
   updateCommentContent(event: any): void {
     const target = event.target as HTMLTextAreaElement;
     this.updatedComment.content = target.value; // Update updatedCommentContent when input changes
   }
-  
+
   cancelEditComment(): void {
     this.selectedComment = null;
     this.updatedComment.content = '';
   }
-  
+
   saveEditComment(): void {
     if (this.selectedComment) {
       this.selectedComment.content = this.updatedComment.content;
@@ -409,64 +410,89 @@ updatedComment: Comment =
     }
   }
 
-
-// get comment by post id missing the front (html) implemntation
-// i thing the right way is when i click on comment icon it is open a model contain commnt
-  getCommentsbyPost(postid:number) {
+  // get comment by post id missing the front (html) implemntation
+  // i thing the right way is when i click on comment icon it is open a model contain commnt
+  getCommentsbyPost(postid: number) {
     this._CommentService.getCommentForPost(postid).subscribe({
-      next:(res) => {
+      next: (res) => {
         this.CommentsForPost = res;
       },
-      error:(err) => {
+      error: (err) => {
         console.log(err);
-      }
-    })
+      },
+    });
   }
 
   toggleComments(post: Post): void {
     // If the clicked post is already selected, deselect it
     if (this.selectedPostId === post.id) {
-        this.selectedPostId = null;
-        this.CommentsForPost = [];
+      this.selectedPostId = null;
+      this.CommentsForPost = [];
     } else {
-        
-        this.selectedPostId = post.id;
-        this.getCommentsbyPost(post.id);
+      this.selectedPostId = post.id;
+      this.getCommentsbyPost(post.id);
     }
-}
-getAllReplay(commentid:number) {
-  this._ReplayService.getRepliesForComment(commentid).subscribe({
-    next:(res) => {
-      this.RepliesForComment = res;
-    },
-    error:(err) => {
-      console.log(err);
-    }
-  })
-}
-addNewReplay(newRplay:Replay){
-  newRplay.userId = this.loggedInUserId;
-  newRplay.commentId = this.CommentIdForReplay;
-  newRplay.postId = this.PostIdForReplay;
-  newRplay.replayTime = Date.now().toLocaleString();
-  newRplay.content = this.ReplayContent;
-  this._ReplayService.addReplay(newRplay).subscribe({
-    next:() => {
-      console.log(newRplay)
-    },
-    error:(err) => {
-      console.log(err)
-    }
-  })
-}
-deleteReplay(replayId:number) {
-  this._ReplayService.deleteReplay(replayId).subscribe({
-    next:()=>{
-      this.getAllReplay(this.CommentIdForReplay);
-    },
-    error:(err)=>{
-      console.log(err)
-    }
-  })
-}
+  }
+  getAllReplay(commentid: number) {
+    this._ReplayService.getRepliesForComment(commentid).subscribe({
+      next: (res) => {
+        this.RepliesForComment = res;
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  }
+  addNewReplay(newRplay: Replay) {
+    newRplay.userId = this.loggedInUserId;
+    newRplay.commentId = this.CommentIdForReplay;
+    newRplay.postId = this.PostIdForReplay;
+    newRplay.replayTime = Date.now().toLocaleString();
+    newRplay.content = this.ReplayContent;
+    this._ReplayService.addReplay(newRplay).subscribe({
+      next: () => {
+        console.log(newRplay);
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  }
+  deleteReplay(replayId: number) {
+    this._ReplayService.deleteReplay(replayId).subscribe({
+      next: () => {
+        this.getAllReplay(this.CommentIdForReplay);
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  }
+
+  GetSuggestions() {
+    setTimeout(() => {
+      let mail:any = localStorage.getItem('email');
+      let id:any;
+      this.authService.getCurrentUser(mail).subscribe({
+        next: (user) => {
+          console.log(`mail ${mail}`);
+          id = user.userId;
+          this._SuggestionService.getUserIds(id).subscribe({
+            next: (res) => {
+              console.log(res);
+              this.users = res;
+            },
+            error: (err) => {
+              console.log('id id' + id);
+              console.log(err);
+            },
+          });
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
+      console.log(`id = ${id}`);
+    }, 1000);
+  }
 }

@@ -6,17 +6,14 @@ import { Replay } from '../Interfaces/replay';
 import { UserData } from '../Interfaces/user-data';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class SuggestionService {
+  constructor(private httpclient: HttpClient) {}
 
-  constructor(private httpclient:HttpClient) { }
-
-   getUserIds(loggedInUserId: string|any): Observable<UserData[]> {
-    return this.httpclient.get<UserData[]>(`http://localhost:5017/api/Account/unfollow/${loggedInUserId}`);
+  getUserIds(loggedInUserId: string | any): Observable<UserData[]> {
+    return this.httpclient.get<UserData[]>(
+      `http://localhost:5017/api/Account/suggestions?id=${loggedInUserId}`
+    );
   }
-
-  
 }
-
-

@@ -168,7 +168,7 @@
                                                     [(ngModel)]="updatedComment.content"></textarea>
                                                 <!-- Display Edit and Cancel buttons -->
                                                 <div *ngIf="selectedComment && selectedComment.id === comment.id">
-                                                    
+
                                                     <button class="btn btn-primary me-2"
                                                         (click)="saveEditComment()">Save</button>
                                                     <button class="btn btn-secondary"
@@ -195,7 +195,7 @@
                                                             <div class="d-flex justify-content-between w-100">
                                                                 <p>
                                                                     <a class="btn btn-outline-success"><i class="fa fa-reply"></i> Reply</a>
-                                                                
+
                                                                 </p>
                                                             </div>
                                                             <!-- Edit and delete options -->
@@ -264,8 +264,8 @@
                 <div class="big-card sugess">
                     <div class="card-container sugess-cont">
 
-                        
-                        <div class="card  sugesscard" *ngFor="let user of users | async">
+
+                        <div class="card  sugesscard" *ngFor="let user of users ">
 
                             <img class="user-image" [src]="user.profileImage" alt="User Image">
 
