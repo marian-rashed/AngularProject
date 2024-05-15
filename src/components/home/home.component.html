@@ -264,9 +264,10 @@
                 <div class="big-card sugess">
                     <div class="card-container sugess-cont">
 
-                        <div class="card  sugesscard" *ngFor="let user of users">
+                        
+                        <div class="card  sugesscard" *ngFor="let user of users | async">
 
-                            <img class="user-image" [src]="user.imageUrl" alt="User Image">
+                            <img class="user-image" [src]="user.profileImage" alt="User Image">
 
 
                             <div class="user-details">

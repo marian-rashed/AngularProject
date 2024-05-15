@@ -14,6 +14,8 @@ import { Comment } from '../../Interfaces/comment';
 import { FormsModule } from "@angular/forms";
 import { ReplayService } from '../../Services/replay.service';
 import { Replay } from '../../Interfaces/replay';
+import {SuggestionService} from '../../Services/suggestion.service';
+import {UserData}from '../../Interfaces/user-data';
 declare var $: any;
 @Component({
   selector: 'app-home',
@@ -24,7 +26,8 @@ declare var $: any;
 })
 export class HomeComponent implements OnInit {
 
-  users = [
+  users = this._SuggestionService.getUserIds("200a41ca-db27-46d6-9b2d-2f8397f18252");
+  /*[
     {
       imageUrl: '../../assets/Images/hagar.jpg',
       name: 'John Doe',
@@ -55,7 +58,8 @@ export class HomeComponent implements OnInit {
       name: 'Jane Smith',
       email: 'jane@example.com',
     },
-  ];
+  ];*/
+  
   items: Post[] = [];
   newPost: Post = {
     userId: '',
@@ -104,7 +108,8 @@ updatedComment: Comment =
     private authService: AuthService,
     private route: ActivatedRoute,
     private _CommentService: CommentService,
-    private _ReplayService: ReplayService
+    private _ReplayService: ReplayService,
+    private _SuggestionService:SuggestionService
   ) {}
 
   ngOnInit(): void {
