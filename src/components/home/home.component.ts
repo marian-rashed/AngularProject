@@ -86,7 +86,7 @@ updatedComment: Comment =
   postId:0,
   userId:""
 };
-  showReactListFlag: boolean = false;
+  
   reactOnPost: {
     [postId: number]: { likeCount: number; dislikeCount: number };
   } = {};
@@ -273,17 +273,7 @@ updatedComment: Comment =
     });
   }
 
-  showReactList(item: Post): void {
-    this._ReactService.getReactsForPost(item.id).subscribe({
-      next: (reacts) => {
-        // Store the reacts for the current post
-        this.reacts = reacts;
-      },
-      error: (err) => {
-        console.log(err);
-      },
-    });
-  }
+  
 
   addReact(postId: number, value: boolean): void {
     this.newReact.userId = this.loggedInUserId;
