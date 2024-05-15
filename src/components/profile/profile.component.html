@@ -59,16 +59,8 @@
             <h3 class="p-4"> My Posts</h3>
 
             <div class="card w-100" *ngFor="let post of UserPosts">
+                
                 <div class="card-body ">
-                    <!-- Your posts content here -->
-                    <!-- Post Input Section -->
-
-
-                    <!-- Post Section -->
-
-
-
-
                     <div class="d-flex flex-start align-items-center">
                         <!-- User Image -->
                         <img class="rounded-circle shadow-1-strong me-3" [src]="updatedUserData.profileIamge"
@@ -131,8 +123,7 @@
                                         <div class="d-flex justify-content-between w-100">
                                             <p>
                                                 <a class="btn btn-outline-success"><i class="fa fa-reply"></i> Reply</a>
-                                                <a class="btn text-white btn-danger"><i class="fa fa-heart"></i>
-                                                    Like</a>
+                                            
                                             </p>
                                         </div>
                                     </div>
@@ -147,6 +138,7 @@
 
             </div>
         </div>
+
 
         <div class="col-lg-4">
 
