@@ -12,6 +12,8 @@ import { forkJoin } from 'rxjs';
 import { CommentService } from '../../Services/comment.service';
 import { Comment } from '../../Interfaces/comment';
 import { FormsModule } from "@angular/forms";
+import { ReplayService } from '../../Services/replay.service';
+import { Replay } from '../../Interfaces/replay';
 declare var $: any;
 @Component({
   selector: 'app-home',
@@ -92,12 +94,17 @@ updatedComment: Comment =
   } = {};
   CommentsForPost:Comment[] = [];
   selectedPostId: number | null = null;
+  RepliesForComment:Replay[] = [];
+  CommentIdForReplay:number = 0;
+  PostIdForReplay:number = 0;
+  ReplayContent:string = '';
   constructor(
     private _PostsServiceService: PostsServiceService,
     private _ReactService: ReactService,
     private authService: AuthService,
     private route: ActivatedRoute,
-    private _CommentService: CommentService
+    private _CommentService: CommentService,
+    private _ReplayService: ReplayService
   ) {}
 
   ngOnInit(): void {
@@ -421,5 +428,40 @@ updatedComment: Comment =
         this.selectedPostId = post.id;
         this.getCommentsbyPost(post.id);
     }
+}
+getAllReplay(commentid:number) {
+  this._ReplayService.getRepliesForComment(commentid).subscribe({
+    next:(res) => {
+      this.RepliesForComment = res;
+    },
+    error:(err) => {
+      console.log(err);
+    }
+  })
+}
+addNewReplay(newRplay:Replay){
+  newRplay.userId = this.loggedInUserId;
+  newRplay.commentId = this.CommentIdForReplay;
+  newRplay.postId = this.PostIdForReplay;
+  newRplay.replayTime = Date.now().toLocaleString();
+  newRplay.content = this.ReplayContent;
+  this._ReplayService.addReplay(newRplay).subscribe({
+    next:() => {
+      console.log(newRplay)
+    },
+    error:(err) => {
+      console.log(err)
+    }
+  })
+}
+deleteReplay(replayId:number) {
+  this._ReplayService.deleteReplay(replayId).subscribe({
+    next:()=>{
+      this.getAllReplay(this.CommentIdForReplay);
+    },
+    error:(err)=>{
+      console.log(err)
+    }
+  })
 }
 }
