@@ -12,6 +12,8 @@ import { forkJoin } from 'rxjs';
 import { CommentService } from '../../Services/comment.service';
 import { Comment } from '../../Interfaces/comment';
 import { FormsModule } from "@angular/forms";
+import { ReplayService } from '../../Services/replay.service';
+import { Replay } from '../../Interfaces/replay';
 declare var $: any;
 @Component({
   selector: 'app-home',
@@ -86,18 +88,23 @@ updatedComment: Comment =
   postId:0,
   userId:""
 };
-  showReactListFlag: boolean = false;
+  
   reactOnPost: {
     [postId: number]: { likeCount: number; dislikeCount: number };
   } = {};
   CommentsForPost:Comment[] = [];
   selectedPostId: number | null = null;
+  RepliesForComment:Replay[] = [];
+  CommentIdForReplay:number = 0;
+  PostIdForReplay:number = 0;
+  ReplayContent:string = '';
   constructor(
     private _PostsServiceService: PostsServiceService,
     private _ReactService: ReactService,
     private authService: AuthService,
     private route: ActivatedRoute,
-    private _CommentService: CommentService
+    private _CommentService: CommentService,
+    private _ReplayService: ReplayService
   ) {}
 
   ngOnInit(): void {
@@ -273,17 +280,7 @@ updatedComment: Comment =
     });
   }
 
-  showReactList(item: Post): void {
-    this._ReactService.getReactsForPost(item.id).subscribe({
-      next: (reacts) => {
-        // Store the reacts for the current post
-        this.reacts = reacts;
-      },
-      error: (err) => {
-        console.log(err);
-      },
-    });
-  }
+  
 
   addReact(postId: number, value: boolean): void {
     this.newReact.userId = this.loggedInUserId;
@@ -431,5 +428,40 @@ updatedComment: Comment =
         this.selectedPostId = post.id;
         this.getCommentsbyPost(post.id);
     }
+}
+getAllReplay(commentid:number) {
+  this._ReplayService.getRepliesForComment(commentid).subscribe({
+    next:(res) => {
+      this.RepliesForComment = res;
+    },
+    error:(err) => {
+      console.log(err);
+    }
+  })
+}
+addNewReplay(newRplay:Replay){
+  newRplay.userId = this.loggedInUserId;
+  newRplay.commentId = this.CommentIdForReplay;
+  newRplay.postId = this.PostIdForReplay;
+  newRplay.replayTime = Date.now().toLocaleString();
+  newRplay.content = this.ReplayContent;
+  this._ReplayService.addReplay(newRplay).subscribe({
+    next:() => {
+      console.log(newRplay)
+    },
+    error:(err) => {
+      console.log(err)
+    }
+  })
+}
+deleteReplay(replayId:number) {
+  this._ReplayService.deleteReplay(replayId).subscribe({
+    next:()=>{
+      this.getAllReplay(this.CommentIdForReplay);
+    },
+    error:(err)=>{
+      console.log(err)
+    }
+  })
 }
 }
