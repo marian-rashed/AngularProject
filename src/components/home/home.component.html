@@ -365,22 +365,25 @@
                     <div class="card-container sugess-cont">
 
 
-                        <div class="card  sugesscard" *ngFor="let user of users ">
+                        <div class="card  sugesscard  " *ngFor="let user of users " style="background-color: #00BD97;">
 
-                            <img class="user-image" [src]="user.profileImage" alt="User Image">
+                            <img class="user-image rounded-pill " src="https://img.freepik.com/free-vector/isolated-young-handsome-man-different-poses-white-background-illustration_632498-853.jpg?t=st=1715863459~exp=1715867059~hmac=c2d9f41084fb7aa46ff8c64cbe48708353d2b9696adc3db7456965c852af868e&w=740"  style="width:80px ;height: 80px;" alt="User Image">
 
 
-                            <div class="user-details">
-                                <h6>{{ user.name }}</h6>
-                                <p>{{ user.email }}</p>
+                            <div class="user-details  text-light mt-3 text-center" >
+                                <h4 class="mt-2 ">{{ user.userName }}</h4>
+                                <h4 class="mt-2">{{ user.email }}</h4>
                             </div>
+                             
+                              
 
+                            
 
-                            <div class="position-absolute" style="top: 20px; right: 20px;">
-                                <a>
-                                    <i class="fa-regular fa-square-plus fa-2xl"></i>
+                            <div class="position-absolute " style="top: 20px; right: 20px;">
+                                <a href="#">
+                                    <i class="fa-regular fa-square-plus fa-2xl" style="color: white;"></i>
                                 </a>
-
+                               
                             </div>
                         </div>
                     </div>
