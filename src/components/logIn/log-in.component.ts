@@ -32,7 +32,7 @@ export class LogInComponent {
 
         // Set query parameters to be accessed by all components
         this.authService.setQueryParams({ email: this.credentials.email });
-
+        localStorage.setItem("email",this.credentials.email);
         // Redirect to the home component
         this.router.navigate(['/home']);
       },

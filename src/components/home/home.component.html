@@ -196,6 +196,7 @@
 
                                                             <!--  main  outer replay button in comment -->
                                                             <div class="d-flex justify-content-between w-100">
+
                                                                 <!--  main  outer replay button in comment -->
 
                                                                 <button type="button" class="btn text-light"
@@ -294,6 +295,8 @@
 
 
 
+
+
                                                             </div>
                                                             <!-- Edit and delete options -->
                                                             <div
@@ -361,9 +364,10 @@
                 <div class="big-card sugess">
                     <div class="card-container sugess-cont">
 
-                        <div class="card  sugesscard" *ngFor="let user of users">
 
-                            <img class="user-image" [src]="user.imageUrl" alt="User Image">
+                        <div class="card  sugesscard" *ngFor="let user of users ">
+
+                            <img class="user-image" [src]="user.profileImage" alt="User Image">
 
 
                             <div class="user-details">
