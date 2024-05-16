@@ -50,6 +50,7 @@ export class ProfileComponent implements OnInit {
   newReact: React = { id: 0, value: true, userId: '', postId: 0 };
   newComment: Comment = { id: 0, content: '', userId: '', postId: 0,commentTime:"2024-05-11T19:22:55.413Z" };
   CommentContent:string = '';
+  imageofUserComment:string='';
 
   selectedFile: File = new File([], '');
   selectedPost: Post | null = null; // To store the selected post for editing
@@ -338,6 +339,7 @@ updatedComment: Comment =
     this._CommentService.addComment(this.newComment).subscribe({
       next:() => {
         console.log(this.newComment)
+        
       },
       error:(err) => {
         console.log(err);
@@ -393,27 +395,39 @@ updatedComment: Comment =
 
 
 // get comment by post id missing the front (html) implemntation
-// i thing the right way is when i click on comment icon it is open a model contain commnt
-  getCommentsbyPost(postid:number) {
-    this._CommentService.getCommentForPost(postid).subscribe({
-      next:(res) => {
-        this.CommentsForPost = res;
-      },
-      error:(err) => {
-        console.log(err);
+getCommentsbyPost(postid: number) {
+  this._CommentService.getCommentForPost(postid).subscribe({
+    next: (res) => {
+      this.CommentsForPost = res;
+      for (const comment of this.CommentsForPost) { // Use 'of' instead of 'in'
+        if (comment.userId !== this.UserDataObj.id) { // Check if comment has a userId
+          this.profileService.GetUserData(comment.userId).subscribe
+          ({
+            next:(res)=>
+              {
+                console.log(comment.userId);
+                console.log(comment);
+                this.imageofUserComment = res.profileImage;
+              }
+          })
+        }
+       
       }
-    })
-  }
-
-  toggleComments(post: Post): void {
-    // If the clicked post is already selected, deselect it
-    if (this.selectedPostId === post.id) {
-        this.selectedPostId = null;
-        this.CommentsForPost = [];
-    } else {
-        
-        this.selectedPostId = post.id;
-        this.getCommentsbyPost(post.id);
+    },
+    error: (err) => {
+      console.log(err);
     }
+  });
 }
+
+toggleComments(post: Post): void {
+  if (this.selectedPostId === post.id) {
+    this.selectedPostId = null;
+    this.CommentsForPost = [];
+  } else {
+    this.selectedPostId = post.id;
+    this.getCommentsbyPost(post.id);
+  }
+}
+
 }
