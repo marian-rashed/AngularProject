@@ -4,8 +4,7 @@
             <!-- Profile Cover Image -->
             <div class="position-relative bg-dark" style="height: 300px;">
                 <!-- Cover Image -->
-                <img [src]="UserDataObj.coverImage"
-                    alt="Cover Image" class="w-100 h-100 object-fit-cover">
+                <img [src]="UserDataObj.coverImage" alt="Cover Image" class="w-100 h-100 object-fit-cover">
                 <!-- Personal Image -->
                 <img [src]="UserDataObj.profileImage" alt="Personal Image" class="position-absolute"
                     style="bottom: 20px; left: 20px; border: 5px solid white; border-radius: 50%; width: 150px; height: 150px;">
@@ -46,7 +45,7 @@
                 <button class="btn btn-primary" (click)="updateBio()">Save Bio</button>
             </div>
         </div>
-        
+
     </div>
 
 
@@ -58,8 +57,8 @@
         <div class="col-lg-8">
             <h3 class="p-4"> My Posts</h3>
 
-            <div  *ngFor="let post of UserPosts">
-                
+            <div *ngFor="let post of UserPosts">
+
                 <div *ngIf="selectedPost && selectedPost.id === post.id" class="card">
                     <div class="card-body">
                         <textarea class="rounded-5 form-control mb-3" aria-label="With textarea"
@@ -76,7 +75,7 @@
                 </div>
                 <div *ngIf="!selectedPost || selectedPost.id !== post.id" class=" d-flex justify-content-center card">
                     <div class="">
-                        <div >
+                        <div>
                             <div class="card-body">
                                 <div class="dropdown" style="position: absolute; top: 0; right: 0;">
                                     <button class="btn  dropdown-toggle" type="button" id="dropdownMenuButton"
@@ -95,11 +94,11 @@
 
                                 <div class="d-flex flex-start align-items-center">
                                     <!-- user image -->
-                                    <img class="rounded-circle shadow-1-strong me-3" src="../../assets/Images/hagar.jpg"
+                                    <img class="rounded-circle shadow-1-strong me-3" [src]="UserDataObj.profileImage"
                                         alt="avatar" width="80" height="80" />
                                     <div>
                                         <!-- user name -->
-                                        <h6 class="fw-bold text-dark mb-1">Hager Ibrahim</h6>
+                                        <h6 class="fw-bold text-dark mb-1">{{UserDataObj.userName}}</h6>
                                         <p class="text-muted small mb-0">
                                             {{post.postTime}}
                                         </p>
@@ -109,7 +108,7 @@
                                 <p class="mt-3 mb-4 pb-2">
                                     {{post.content}}
                                 </p>
-                                <img  class="w-100" *ngIf="isPostImageString(post)" [src]="post.postImage">
+                                <img class="w-100" *ngIf="isPostImageString(post)" [src]="post.postImage">
 
 
                                 <!-- reaction section -->
@@ -164,7 +163,7 @@
                             <!-- adding comments section -->
                             <div class="card-footer py-3  mt-3" style="background-color: #00BD97;">
                                 <div class="d-flex flex-start w-100">
-                                    <img class="rounded-circle shadow-1-strong me-3" src="../../assets/Images/hagar.jpg"
+                                    <img class="rounded-circle shadow-1-strong me-3" [src]="UserDataObj.profileImage"
                                         alt="avatar" width="70" height="70" />
 
                                     <!-- comment textbox -->
@@ -190,7 +189,8 @@
                                         <div class="card-body">
                                             <!-- Iterate over CommentsForPost array and display each comment -->
                                             <div *ngFor="let comment of CommentsForPost" class="card mb-3">
-                                                <p class="fs-5" *ngIf="selectedComment !== comment">{{ updatedComment.content}}</p>
+                                                <p class="fs-5" *ngIf="selectedComment !== comment">{{
+                                                    updatedComment.content}}</p>
                                                 <!-- Display input field for editing when comment is selected -->
                                                 <textarea *ngIf="selectedComment === comment" class="form-control"
                                                     [(ngModel)]="updatedComment.content"></textarea>
@@ -206,15 +206,22 @@
                                                     <div class="row">
                                                         <!-- User image -->
                                                         <div class="col-md-3">
-                                                            <img src="https://image.ibb.co/jw55Ex/def_face.jpg"
+                                                            <img *ngIf="comment.userId === UserDataObj.id"
+                                                                [src]="UserDataObj.profileImage" alt="User Image"
                                                                 class="img img-rounded img-fluid" width="90"
                                                                 height="90" />
+                                                            <img *ngIf="comment.userId !== UserDataObj.id"
+                                                                [src]="imageofUserComment" alt="User Image"
+                                                                class="img img-rounded img-fluid" width="90"
+                                                                height="90" />
+
+                                                            
 
                                                         </div>
                                                         <div class="col-md-9">
                                                             <p>
                                                                 <a class="float-left text-decoration-none text-dark">
-                                                                    <h5>Username</h5>
+                                                                    <h5>{{UserDataObj.userName}}</h5>
                                                                 </a>
                                                             </p>
                                                             <div class="clearfix"></div>
@@ -222,7 +229,8 @@
                                                             <p class="fs-5">{{ comment.content }}</p>
                                                             <div class="d-flex justify-content-between w-100">
                                                                 <p>
-                                                                    <a class="btn btn-outline-success"><i class="fa fa-reply"></i> Reply</a>
+                                                                    <a class="btn btn-outline-success"><i
+                                                                            class="fa fa-reply"></i> Reply</a>
 
                                                                 </p>
                                                             </div>
@@ -272,9 +280,9 @@
 
                             <!-- comments section end -->
                         </div>
-                    
+
+                    </div>
                 </div>
-            </div>
 
 
             </div>
