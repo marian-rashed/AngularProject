@@ -4,8 +4,8 @@
     <i [ngClass]="showText ? 'fas fa-chevron-up' : 'fas fa-chevron-down'" [ngStyle]="{'font-size': iconSize}"></i>
   </div>
   <div class="profile">
-    <img src="../../assets/Images/hagar.jpg" alt="Profile Image" class="profile-image">
-    <h5 class="profile-name mt-3 ">Hagar Ibrahim</h5>
+    <img [src]="UserDataObj.profileImage" alt="Profile Image" class="profile-image">
+    <h5 class="profile-name mt-3 ">{{UserDataObj.userName}}</h5>
   </div>
   <ul class="menu-items fs-5">
     <li><a routerLink="home" routerLinkActive="active"><i class="fas fa-home" [ngStyle]="{'font-size': iconSize}"></i> <span *ngIf="showText">Home</span></a></li>
